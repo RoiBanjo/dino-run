@@ -30,21 +30,17 @@ func _physics_process(delta: float) -> void:
 	if is_enabled:
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-
-	if not is_on_floor():
-		velocity += get_gravity() * 1.5 * delta
-
+			current_state = State.JUMP
+		elif not is_on_floor():
+			velocity += get_gravity() * 1.5 * delta
+		else:
+			current_state = State.RUN
 	play_animation()
-
 	move_and_slide()
 
 
 func play_animation() -> void:
 	animation_player.play(animation_map[current_state])
-
-
-func start_running() -> void:
-	current_state = State.RUN
 
 
 func enable_dino() -> void:

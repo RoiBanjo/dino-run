@@ -35,4 +35,3 @@ func update_ground_position() -> void:
 
 func start_game() -> void:
 	is_started = true
-	dino.start_running()
