@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8b3b2j48wy2v"]
+[gd_scene load_steps=6 format=3 uid="uid://c8b3b2j48wy2v"]
 
 [ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/game.gd" id="1_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://i8txjyofgh62" path="res://scenes/background.tscn" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://cbbiqwsjd8r3q" path="res://scenes/ground.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://byu4a5u5iemas" path="res://scenes/environment/background.tscn" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dinos/dino.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b7e2vneabnpt0" path="res://scenes/environment/ground.tscn" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://d0fi23kccegbs" path="res://scenes/environment/despawner_area.tscn" id="5_u5sy4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
 
-[node name="Background" parent="." instance=ExtResource("1_yqjtg")]
+[node name="Background" parent="." instance=ExtResource("2_iywne")]
+unique_name_in_owner = true
 
-[node name="Ground" parent="." instance=ExtResource("2_lnu2h")]
+[node name="Ground" parent="." instance=ExtResource("3_p57ef")]
 unique_name_in_owner = true
 position = Vector2(0, 552)
 
@@ -22,6 +24,17 @@ position = Vector2(120, 555)
 
 [node name="StartTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 1.9999999999999998
+wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="Spaws" type="Node2D" parent="."]
+
+[node name="Despawner" parent="Spaws" instance=ExtResource("5_u5sy4")]
+unique_name_in_owner = true
+
+[node name="SpawnTop" type="Marker2D" parent="Spaws"]
+position = Vector2(1452, 268)
+
+[node name="SpawnBottom" type="Marker2D" parent="Spaws"]
+position = Vector2(1452, 552)
