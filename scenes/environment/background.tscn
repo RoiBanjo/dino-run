@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://i8txjyofgh62"]
+[gd_scene load_steps=6 format=3 uid="uid://d15nomd07g033"]
 
 [ext_resource type="Texture2D" uid="uid://bd1ksl5o8q8hq" path="res://assets/graphics/background/plx-1.png" id="1_wisxt"]
 [ext_resource type="Texture2D" uid="uid://d0sppnajpirnq" path="res://assets/graphics/background/plx-2.png" id="2_wax1t"]

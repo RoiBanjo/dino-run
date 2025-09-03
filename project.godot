@@ -23,7 +23,8 @@ window/stretch/scale_mode="integer"
 [file_customization]
 
 folder_colors={
-"res://assets/": "yellow"
+"res://assets/": "yellow",
+"res://scenes/": "red"
 }
 
 [layer_names]
