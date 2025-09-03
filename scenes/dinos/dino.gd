@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 enum State {IDLE, DUCK, HIT, JUMP, RUN}
 
-const JUMP_VELOCITY = -800.0
+const JUMP_VELOCITY = -900.0
 
 var current_state: State = State.IDLE
 var animation_map = {
@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * 1.5 * delta
 
 	play_animation()
 
