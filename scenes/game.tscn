@@ -28,13 +28,13 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Spaws" type="Node2D" parent="."]
-
-[node name="Despawner" parent="Spaws" instance=ExtResource("5_u5sy4")]
+[node name="Spawns" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="SpawnTop" type="Marker2D" parent="Spaws"]
+[node name="Despawner" parent="Spawns" instance=ExtResource("5_u5sy4")]
+
+[node name="SpawnTop" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 268)
 
-[node name="SpawnBottom" type="Marker2D" parent="Spaws"]
+[node name="SpawnBottom" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 552)

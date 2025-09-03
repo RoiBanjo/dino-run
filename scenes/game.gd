@@ -8,7 +8,7 @@ var screen_size: Vector2i
 
 @onready var camera: Camera2D = $Camera2D
 @onready var dino: Dino = $Dino
-@onready var despawner: Area2D = %DespawnerArea
+@onready var spawns: Node2D = %Spawns
 @onready var ground: StaticBody2D = %Ground
 @onready var start_timer: Timer = %StartTimer
 
@@ -23,10 +23,10 @@ func _physics_process(_delta: float) -> void:
 	if is_started:
 		dino.position.x += SPEED
 		camera.position.x += SPEED
-		despawner.update_position(SPEED)
+		for spawn in spawns.get_children():
+			spawn.position.x += SPEED
 
 	update_ground_position()
-
 
 func update_ground_position() -> void:
 	if camera.position.x - ground.position.x > screen_size.x * 1.5:
