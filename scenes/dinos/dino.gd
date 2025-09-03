@@ -14,20 +14,25 @@ var animation_map = {
 	State.JUMP: "jump",
 	State.RUN: "run",
 }
+var is_enabled: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
+	is_enabled = false
 	current_state = State.IDLE
+	var timer_node = get_node("../StartTimer")
+	timer_node.timeout.connect(enable_dino.bind())
 
 
 func _physics_process(delta: float) -> void:
+	if is_enabled:
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
 
 	play_animation()
 
@@ -40,3 +45,7 @@ func play_animation() -> void:
 
 func start_running() -> void:
 	current_state = State.RUN
+
+
+func enable_dino() -> void:
+	is_enabled = true
