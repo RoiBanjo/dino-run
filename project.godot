@@ -11,14 +11,28 @@ config_version=5
 [application]
 
 config/name="Dino Run"
+run/main_scene="uid://c8b3b2j48wy2v"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [file_customization]
 
 folder_colors={
 "res://assets/": "yellow"
 }
+
+[layer_names]
+
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Dino"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Obstacles"
+2d_physics/layer_5="Items"
 
 [rendering]
 
