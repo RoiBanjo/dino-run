@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmy21m67qa8x5"]
+
+[ext_resource type="Texture2D" uid="uid://bv2h63uoi71r8" path="res://assets/graphics/objects/ridges/4.png" id="1_87gh8"]
+
+[node name="Stump" type="Area2D"]
+collision_layer = 8
+collision_mask = 34
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_87gh8")
+centered = false
+offset = Vector2(-32, -60)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(7.3333335, -59.333336, -6.666667, -60.333336, -16.333334, -56.666668, -23, -47.333336, -14.666667, -37.666668, -11.333334, -26, -11.666667, -13, -24, -5.3333335, -32.333336, 0.6666667, 33, 0.33333334, 28.666668, -6.3333335, 25.666668, -13, 16.666668, -16.666668, 16.333334, -27.666668, 24, -41.666668, 23.333334, -51.666668, 14, -55.666668)
