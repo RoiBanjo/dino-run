@@ -31,11 +31,6 @@ func _physics_process(_delta: float) -> void:
 		camera.position.x += SPEED
 		for spawn in spawns.get_children():
 			spawn.position.x += SPEED
-
-	update_ground_position()
-
-
-func update_ground_position() -> void:
 	if camera.position.x - ground.position.x > screen_size.x * 1.5:
 		ground.position.x += screen_size.x
 
