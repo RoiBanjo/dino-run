@@ -16,11 +16,11 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(0, 552)
 
+[node name="Dino" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(100, 554)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
-
-[node name="Dino" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(120, 555)
 
 [node name="StartTimer" type="Timer" parent="."]
 unique_name_in_owner = true

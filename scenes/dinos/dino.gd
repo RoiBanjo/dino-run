@@ -17,9 +17,12 @@ var animation_map = {
 var is_enabled: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var collision_run: CollisionShape2D = $CollisionShapeRun
+@onready var collision_duck: CollisionShape2D = $CollisionShapeDuck
 
 
 func _ready() -> void:
+	collision_duck.disabled = true
 	is_enabled = false
 	current_state = State.IDLE
 	var timer_node = get_node("../StartTimer")
@@ -31,12 +34,24 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			current_state = State.JUMP
+		elif Input.is_action_pressed("ui_down") and is_on_floor():
+			current_state = State.DUCK
 		elif not is_on_floor():
 			velocity += get_gravity() * 1.5 * delta
 		else:
 			current_state = State.RUN
+	check_collision_shape()
 	play_animation()
 	move_and_slide()
+
+
+func check_collision_shape() -> void:
+	if current_state == State.DUCK:
+		collision_duck.disabled = false
+		collision_run.disabled = true
+	else:
+		collision_duck.disabled = true
+		collision_run.disabled = false
 
 
 func play_animation() -> void:
