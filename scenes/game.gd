@@ -35,3 +35,7 @@ func update_ground_position() -> void:
 
 func start_game() -> void:
 	is_started = true
+
+
+func _on_despawner_body_entered(body: Node2D) -> void:
+	body.queue_free()

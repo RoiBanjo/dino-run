@@ -1,16 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8b3b2j48wy2v"]
+[gd_scene load_steps=7 format=3 uid="uid://c8b3b2j48wy2v"]
 
 [ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://byu4a5u5iemas" path="res://scenes/environment/background.tscn" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dinos/dino.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b7e2vneabnpt0" path="res://scenes/environment/ground.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://d0fi23kccegbs" path="res://scenes/environment/despawner_area.tscn" id="5_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cmb41isywt1hk" path="res://scenes/objects/signal.tscn" id="6_p57ef"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
 
 [node name="Background" parent="." instance=ExtResource("2_iywne")]
 unique_name_in_owner = true
+
+[node name="SignalGo" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(300, 564)
 
 [node name="Ground" parent="." instance=ExtResource("3_p57ef")]
 unique_name_in_owner = true
@@ -38,3 +42,5 @@ position = Vector2(1452, 268)
 
 [node name="SpawnBottom" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 552)
+
+[connection signal="body_entered" from="Spawns/Despawner" to="." method="_on_despawner_body_entered"]

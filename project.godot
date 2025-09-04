@@ -35,6 +35,7 @@ folder_colors={
 2d_physics/layer_4="Obstacles"
 2d_physics/layer_5="Items"
 2d_physics/layer_6="DespawnAreas"
+2d_physics/layer_7="Decorations"
 
 [rendering]
 
