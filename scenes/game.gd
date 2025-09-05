@@ -7,10 +7,7 @@ const GO_SIGNAL := preload("uid://cmb41isywt1hk")
 const GO_SIGNAL_START_POS := Vector2i(300, 564)
 const SPEED := 10.0
 
-@export_category("Obstacles")
-@export var barrel_scene: PackedScene
-@export var box_scene: PackedScene
-@export var stump_scene: PackedScene
+@export var obstacles: Array[PackedScene]
 
 var is_started: bool = false
 var screen_size: Vector2i
@@ -27,7 +24,9 @@ func _ready() -> void:
 	is_started = false
 	screen_size = get_window().size
 	create_go_signal()
-	
+	obstacles = obstacles.filter(func(scene): return scene != null)
+	print(obstacles)
+
 
 func _physics_process(_delta: float) -> void:
 	if is_started:
@@ -64,7 +63,7 @@ func start_game() -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-	spawn_obstacle(stump_scene)
+	spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:
