@@ -9,6 +9,8 @@ const SPEED := 10.0
 
 @export var obstacles: Array[PackedScene]
 
+var current_obstacle: Area2D = null
+var gameover: bool = false
 var is_started: bool = false
 var screen_size: Vector2i
 
@@ -22,14 +24,16 @@ var screen_size: Vector2i
 
 
 func _ready() -> void:
+	GameManager.current_health = GameManager.MAX_HEALTH
 	is_started = false
 	screen_size = get_window().size
 	create_go_signal()
 	obstacles = obstacles.filter(func(scene): return scene != null)
+	GameManager.reduce_health.connect(on_reduce_health.bind())
 	
 
 func _physics_process(_delta: float) -> void:
-	if is_started:
+	if is_started and not gameover:
 		dino.position.x += SPEED
 		camera.position.x += SPEED
 		for spawn in spawns.get_children():
@@ -54,14 +58,20 @@ func spawn_obstacle(scene: PackedScene) -> void:
 	obstacle.position = spawns.get_child(2).position
 	add_child(obstacle)
 	obstacle.body_entered.connect(dino.on_obstacle_hit.bind())
-	obstacle.body_entered.connect(ui.on_obstacle_hit.bind())
+	current_obstacle = obstacle
 
 
 func start_game() -> void:
 	is_started = true
 	spawn_timer.start()
-	dino.current_state = dino.State.RUN
+	dino.enable_dino()
 
+
+func game_over() -> void:
+	gameover = true
+	current_obstacle.set_deferred("monitoring", false)
+	dino.die()
+	
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
@@ -73,3 +83,8 @@ func _on_despawner_area_entered(area: Area2D) -> void:
 
 func _on_despawner_body_entered(body: Node2D) -> void:
 	body.queue_free()
+
+
+func on_reduce_health() -> void:
+	if GameManager.current_health == 0:
+		game_over()

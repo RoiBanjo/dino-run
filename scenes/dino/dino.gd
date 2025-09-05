@@ -2,8 +2,9 @@ class_name Dino
 extends CharacterBody2D
 
 
-enum State {IDLE, DUCK, HIT, JUMP, RUN}
+enum State {IDLE, DUCK, HIT, JUMP, RUN, DIE, WAIT_RESTART}
 
+const DIE_VELOCITY = -800
 const JUMP_VELOCITY = -900.0
 
 var current_state: State = State.IDLE
@@ -13,15 +14,19 @@ var animation_map = {
 	State.HIT: "hit",
 	State.JUMP: "jump",
 	State.RUN: "run",
+	State.DIE: "die",
+	State.WAIT_RESTART: "wait_restart"
 }
 var is_enabled: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_run: CollisionShape2D = $CollisionShapeRun
 @onready var collision_duck: CollisionShape2D = $CollisionShapeDuck
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
+	sprite.flip_v = false
 	collision_duck.disabled = true
 	is_enabled = false
 	change_state(State.IDLE)
@@ -35,23 +40,29 @@ func _physics_process(delta: float) -> void:
 		match current_state:
 			State.JUMP:
 				if not is_on_floor():
-					velocity += get_gravity() * 1.5 * delta
+					handle_gravity(delta)
 				else:
 					change_state(State.RUN)
 			State.RUN:
-				if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+				if Input.is_action_just_pressed("ui_accept"):
 					velocity.y = JUMP_VELOCITY
 					change_state(State.JUMP)
-				elif Input.is_action_pressed("ui_down") and is_on_floor():
+				elif Input.is_action_pressed("ui_down"):
 					change_state(State.DUCK)
 			State.DUCK:
 				if Input.is_action_just_released("ui_down"):
 					change_state(State.RUN)
 			State.HIT:
 				if not is_on_floor():
-					velocity += get_gravity() * 1.5 * delta
-
-
+					handle_gravity(delta)
+			State.DIE:
+				handle_gravity(delta)
+				change_state(State.WAIT_RESTART)
+			State.WAIT_RESTART:
+				handle_gravity(delta)
+				is_enabled = false
+	elif velocity != Vector2.ZERO:
+		handle_gravity(delta)
 	check_collision_shape()
 	play_animation()
 	move_and_slide()
@@ -66,12 +77,22 @@ func check_collision_shape() -> void:
 		collision_run.disabled = false
 
 
+func handle_gravity(delta: float) -> void:
+	velocity += get_gravity() * 1.5 * delta
+
+
 func play_animation() -> void:
 	animation_player.play(animation_map[current_state])
 
 
 func enable_dino() -> void:
 	is_enabled = true
+	change_state(State.RUN)
+
+
+func die() -> void:
+	change_state(State.DIE)
+	velocity.y = DIE_VELOCITY
 
 
 func change_state(new_state: State) -> void:
@@ -79,7 +100,9 @@ func change_state(new_state: State) -> void:
 
 
 func on_obstacle_hit(_body: Node2D) -> void:
-	change_state(State.HIT)
+	if current_state != State.HIT:
+		change_state(State.HIT)
+		GameManager.process_hit()
 
 
 func on_hit_animation_end() -> void:

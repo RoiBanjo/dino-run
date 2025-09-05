@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cslk0aajw4nlu"]
+[gd_scene load_steps=14 format=3 uid="uid://cslk0aajw4nlu"]
 
 [ext_resource type="Script" uid="uid://cyfvtf67yrwh4" path="res://scenes/dino/dino.gd" id="1_xtykj"]
 [ext_resource type="Texture2D" uid="uid://c1kdx4s6g1rs" path="res://assets/graphics/dinos/DinoSprites - mort.png" id="2_xtykj"]
@@ -22,6 +22,35 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mkokt"]
+resource_name = "die"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40635255, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 15, 15, 16, 15, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_2p14s"]
@@ -125,14 +154,46 @@ tracks/0/keys = {
 "values": [4, 5, 6, 7, 8, 9]
 }
 
+[sub_resource type="Animation" id="Animation_nddxa"]
+resource_name = "wait_restart"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cm5t2"]
 _data = {
 &"RESET": SubResource("Animation_cm5t2"),
+&"die": SubResource("Animation_mkokt"),
 &"duck": SubResource("Animation_2p14s"),
 &"hit": SubResource("Animation_vgqyr"),
 &"idle": SubResource("Animation_xtykj"),
 &"jump": SubResource("Animation_klvqn"),
-&"run": SubResource("Animation_uajt7")
+&"run": SubResource("Animation_uajt7"),
+&"wait_restart": SubResource("Animation_nddxa")
 }
 
 [node name="Dino" type="CharacterBody2D"]
