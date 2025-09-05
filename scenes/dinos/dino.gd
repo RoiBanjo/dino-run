@@ -78,7 +78,7 @@ func change_state(new_state: State) -> void:
 	current_state = new_state
 
 
-func on_obstacle_hit(body: Node2D) -> void:
+func on_obstacle_hit(_body: Node2D) -> void:
 	change_state(State.HIT)
 
 
