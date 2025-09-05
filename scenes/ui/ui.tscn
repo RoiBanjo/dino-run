@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfp860s7n5mca"]
+
+[ext_resource type="Texture2D" uid="uid://dqony1vq3cir0" path="res://assets/graphics/hearts/heart_animated_1.png" id="1_u7n8c"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HeartContainers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HeartContainer1" type="Sprite2D" parent="HeartContainers"]
+texture_filter = 1
+position = Vector2(46, 46)
+scale = Vector2(3, 3)
+texture = ExtResource("1_u7n8c")
+hframes = 5
+
+[node name="HeartContainer2" type="Sprite2D" parent="HeartContainers"]
+texture_filter = 1
+position = Vector2(100.00001, 46)
+scale = Vector2(3, 3)
+texture = ExtResource("1_u7n8c")
+hframes = 5
+
+[node name="HeartContainer3" type="Sprite2D" parent="HeartContainers"]
+texture_filter = 1
+position = Vector2(154, 46)
+scale = Vector2(3, 3)
+texture = ExtResource("1_u7n8c")
+hframes = 5
