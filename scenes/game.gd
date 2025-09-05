@@ -18,6 +18,7 @@ var screen_size: Vector2i
 @onready var ground: StaticBody2D = %Ground
 @onready var start_timer: Timer = %StartTimer
 @onready var spawn_timer: Timer = %SpawnTimer
+@onready var ui: CanvasLayer = $UI
 
 
 func _ready() -> void:
@@ -53,6 +54,7 @@ func spawn_obstacle(scene: PackedScene) -> void:
 	obstacle.position = spawns.get_child(2).position
 	add_child(obstacle)
 	obstacle.body_entered.connect(dino.on_obstacle_hit.bind())
+	obstacle.body_entered.connect(ui.on_obstacle_hit.bind())
 
 
 func start_game() -> void:

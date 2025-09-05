@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://byu4a5u5iemas" path="res://scenes/environment/background.tscn" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://fx3lii7khy3j" path="res://scenes/obstacles/rock_small.tscn" id="2_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dinos/dino.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dino/dino.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b7e2vneabnpt0" path="res://scenes/environment/ground.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://crkptonn0oi0m" path="res://scenes/obstacles/rock_med.tscn" id="4_gee14"]
 [ext_resource type="PackedScene" uid="uid://dtxmm2vusk87q" path="res://scenes/obstacles/rock_big.tscn" id="5_0tnpc"]
