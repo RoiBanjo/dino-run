@@ -25,8 +25,7 @@ func _ready() -> void:
 	screen_size = get_window().size
 	create_go_signal()
 	obstacles = obstacles.filter(func(scene): return scene != null)
-	print(obstacles)
-
+	
 
 func _physics_process(_delta: float) -> void:
 	if is_started:
