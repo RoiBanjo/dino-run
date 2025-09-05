@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8b3b2j48wy2v"]
+[gd_scene load_steps=11 format=3 uid="uid://c8b3b2j48wy2v"]
 
 [ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://byu4a5u5iemas" path="res://scenes/environment/background.tscn" id="2_iywne"]
@@ -6,12 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dinos/dino.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b7e2vneabnpt0" path="res://scenes/environment/ground.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://crkptonn0oi0m" path="res://scenes/obstacles/rock_med.tscn" id="4_gee14"]
+[ext_resource type="PackedScene" uid="uid://dtxmm2vusk87q" path="res://scenes/obstacles/rock_big.tscn" id="5_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://d0fi23kccegbs" path="res://scenes/environment/despawner_area.tscn" id="5_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cmy21m67qa8x5" path="res://scenes/obstacles/stump.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cfp860s7n5mca" path="res://scenes/ui/ui.tscn" id="10_vtaks"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_lbhrr")
-obstacles = Array[PackedScene]([ExtResource("6_p57ef"), ExtResource("2_u5sy4"), ExtResource("4_gee14")])
+obstacles = Array[PackedScene]([ExtResource("6_p57ef"), ExtResource("2_u5sy4"), ExtResource("4_gee14"), ExtResource("5_0tnpc")])
 
 [node name="Background" parent="." instance=ExtResource("2_iywne")]
 unique_name_in_owner = true
@@ -36,7 +38,7 @@ autostart = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 2.9999999999999996
+wait_time = 2.0
 
 [node name="Spawns" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -48,6 +50,8 @@ position = Vector2(1452, 268)
 
 [node name="SpawnBottom" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 552)
+
+[node name="UI" parent="." instance=ExtResource("10_vtaks")]
 
 [connection signal="timeout" from="StartTimer" to="." method="start_game"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

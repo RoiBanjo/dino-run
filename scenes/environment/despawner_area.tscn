@@ -8,5 +8,5 @@ collision_layer = 32
 collision_mask = 92
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-350, 324)
+position = Vector2(-550, 324)
 shape = SubResource("RectangleShape2D_lbhrr")
