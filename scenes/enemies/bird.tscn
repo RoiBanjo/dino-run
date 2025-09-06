@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdpg51sihfs2r"]
+
+[ext_resource type="Texture2D" uid="uid://72828gn4jwel" path="res://assets/graphics/enemies/Bird/Bird.png" id="1_xk242"]
+
+[sub_resource type="Animation" id="Animation_jwqbt"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_4nl08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxlv3"]
+_data = {
+&"RESET": SubResource("Animation_4nl08"),
+&"fly": SubResource("Animation_jwqbt")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xk242"]
+radius = 40.0
+height = 116.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk242"]
+size = Vector2(83, 60)
+
+[node name="Bird" type="Area2D"]
+collision_layer = 4
+collision_mask = 34
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("1_xk242")
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bxlv3")
+}
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 3)
+shape = SubResource("CapsuleShape2D_xk242")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-24.5, 1)
+shape = SubResource("RectangleShape2D_xk242")
