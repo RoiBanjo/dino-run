@@ -5,8 +5,20 @@ const DINO_START_POS := Vector2i(100, 554)
 const CAMERA_START_POS := Vector2i(576, 324)
 const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
-const SPEED := 10.0
+const GAME_SPEED: Dictionary = {
+	"Easy": 10.0,
+	"Normal": 20.0,
+	"Hard": 20.0,
+	"Impossible": 30.0,
+}
+const SPAWN_DELAY: Dictionary = {
+	"Easy": 2.0,
+	"Normal": 2.0,
+	"Hard": 1.0,
+	"Impossible": 1.0,
+}
 
+@export_enum("Easy", "Normal", "Hard", "Impossible") var game_difficulty: String
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
 
@@ -16,6 +28,7 @@ var gameover: bool = false
 var is_started: bool = false
 var previous_enemy: Area2D = null
 var screen_size: Vector2i
+var speed := 0.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var dino: Dino = $Dino
@@ -34,14 +47,15 @@ func _ready() -> void:
 	# obstacles = obstacles.filter(func(scene): return scene != null)
 	obstacles.shuffle()
 	GameManager.reduce_health.connect(on_reduce_health.bind())
+	speed = GAME_SPEED[game_difficulty]
 	
 
 func _physics_process(_delta: float) -> void:
 	if is_started and not gameover:
-		dino.position.x += SPEED
-		camera.position.x += SPEED
+		dino.position.x += speed
+		camera.position.x += speed
 		for spawn in spawns.get_children():
-			spawn.position.x += SPEED
+			spawn.position.x += speed
 	if camera.position.x - ground.position.x > screen_size.x * 1.5:
 		ground.position.x += screen_size.x
 
@@ -80,7 +94,7 @@ func spawn_enemy(scene: PackedScene) -> void:
 func start_game() -> void:
 	is_started = true
 	start_timer.stop()
-	spawn_timer.start()
+	spawn_timer.start(SPAWN_DELAY[game_difficulty])
 	dino.enable_dino()
 
 
