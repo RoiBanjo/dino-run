@@ -66,7 +66,6 @@ func _physics_process(delta: float) -> void:
 	check_collision_shape()
 	play_animation()
 	move_and_slide()
-	print(current_state)
 
 
 func check_collision_shape() -> void:
