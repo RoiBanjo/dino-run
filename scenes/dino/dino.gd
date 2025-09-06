@@ -100,7 +100,6 @@ func change_state(new_state: State) -> void:
 
 
 func on_obstacle_hit(_body: Node2D) -> void:
-	print("HIT")
 	if current_state != State.HIT and current_state != State.DIE and current_state != State.WAIT_RESTART:
 		change_state(State.HIT)
 		GameManager.process_hit()
