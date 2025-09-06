@@ -10,7 +10,7 @@ collision_mask = 34
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-71, -2)
+position = Vector2(-74, 4)
 scale = Vector2(4, 4)
 texture = ExtResource("1_vumrp")
 centered = false
@@ -31,4 +31,4 @@ centered = false
 offset = Vector2(-25, -27)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-171, -17, -152, -50, -152, -76, -124, -97, -108, -152, -73, -167, -72, -185, -63, -211, -29, -216, -11, -239, 24, -238, 40, -196, 47, -183, 59, -176, 69, -167, 92, -126, 129, -83, 156, -66, 162, -49, 195, -41, 203, -31, 202, -6, 168, 10, 42.819122, 20.190308, -39, 29, -164, -2)
+polygon = PackedVector2Array(-175, -10, -155, -51, -154, -67, -124, -95, -108, -152, -73, -167, -72, -185, -63, -211, -29, -216, -11, -239, 24, -238, 40, -196, 47, -183, 59, -176, 69, -167, 92, -126, 129, -83, 156, -66, 162, -49, 195, -41, 203, -31, 202, 2, 130, 17, 0, 43, -166, 4)
