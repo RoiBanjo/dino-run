@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdpg51sihfs2r"]
+[gd_scene load_steps=9 format=3 uid="uid://bdpg51sihfs2r"]
 
 [ext_resource type="Script" uid="uid://ck4m4iygqcvos" path="res://scenes/enemies/bird.gd" id="1_jwqbt"]
 [ext_resource type="Texture2D" uid="uid://72828gn4jwel" path="res://assets/graphics/enemies/Bird/Bird.png" id="1_xk242"]
@@ -36,10 +36,28 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_bxlv3"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bxlv3"]
 _data = {
 &"RESET": SubResource("Animation_4nl08"),
-&"fly": SubResource("Animation_jwqbt")
+&"fly": SubResource("Animation_jwqbt"),
+&"idle": SubResource("Animation_bxlv3")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xk242"]
@@ -64,7 +82,7 @@ hframes = 9
 libraries = {
 &"": SubResource("AnimationLibrary_bxlv3")
 }
-autoplay = "fly"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(19, 3)

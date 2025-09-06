@@ -91,11 +91,13 @@ func end_game() -> void:
 		current_obstacle.set_deferred("monitoring", false)
 	if current_enemy != null:
 		current_enemy.set_deferred("monitoring", false)
+		current_enemy.stop_movement = true
 	if previous_enemy != null:
 		previous_enemy.set_deferred("monitoring", false)
+		previous_enemy.stop_movement = true
 	dino.die()
 	
-
+	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
 		var create_enemy := randi_range(0, 2) == 0
