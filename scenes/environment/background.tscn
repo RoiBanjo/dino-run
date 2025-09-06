@@ -8,7 +8,10 @@
 
 [node name="Background" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Parallax2D5" type="Parallax2D" parent="."]
+repeat_size = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D5"]
 scale = Vector2(3, 3)
 texture = ExtResource("1_wisxt")
 centered = false
