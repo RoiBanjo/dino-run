@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtxmm2vusk87q"]
+[gd_scene load_steps=5 format=3 uid="uid://dtxmm2vusk87q"]
 
 [ext_resource type="Texture2D" uid="uid://hna0ksleo1cr" path="res://assets/graphics/objects/rocks/rock pile mossy/Rock Pile 1 - MOSSY - BIG.PNG" id="1_vumrp"]
 [ext_resource type="Texture2D" uid="uid://cy1hgo3yg2x0i" path="res://assets/graphics/objects/rocks/rock pile mossy/Rock Pile 4 - MOSSY - BIG.PNG" id="2_rd85x"]
 [ext_resource type="Texture2D" uid="uid://bycon2k4xovfn" path="res://assets/graphics/objects/rocks/rock pile mossy/Rock Pile 3 - MOSSY - BIG.PNG" id="3_bgy7o"]
+[ext_resource type="Texture2D" uid="uid://dr2n5rc7klhjt" path="res://assets/graphics/objects/pointers/8.png" id="4_rd85x"]
 
 [node name="RockBig" type="Area2D"]
 collision_layer = 8
@@ -32,3 +33,11 @@ offset = Vector2(-25, -27)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-175, -10, -155, -51, -154, -67, -124, -95, -108, -152, -73, -167, -72, -185, -63, -211, -29, -216, -11, -239, 24, -238, 40, -196, 47, -183, 59, -176, 69, -167, 92, -126, 129, -83, 156, -66, 162, -49, 195, -41, 203, -31, 202, 2, 130, 17, 0, 43, -166, 4)
+
+[node name="SignalSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-300, 4)
+scale = Vector2(4, 4)
+texture = ExtResource("4_rd85x")
+centered = false
+offset = Vector2(-5, -21)
