@@ -1,6 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdpg51sihfs2r"]
+[gd_scene load_steps=8 format=3 uid="uid://bdpg51sihfs2r"]
 
+[ext_resource type="Script" uid="uid://ck4m4iygqcvos" path="res://scenes/enemies/bird.gd" id="1_jwqbt"]
 [ext_resource type="Texture2D" uid="uid://72828gn4jwel" path="res://assets/graphics/enemies/Bird/Bird.png" id="1_xk242"]
+
+[sub_resource type="Animation" id="Animation_4nl08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_jwqbt"]
 resource_name = "fly"
@@ -20,21 +36,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
-[sub_resource type="Animation" id="Animation_4nl08"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bxlv3"]
 _data = {
 &"RESET": SubResource("Animation_4nl08"),
@@ -51,6 +52,7 @@ size = Vector2(83, 60)
 [node name="Bird" type="Area2D"]
 collision_layer = 4
 collision_mask = 34
+script = ExtResource("1_jwqbt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -14,6 +14,7 @@ var current_enemy: Area2D = null
 var current_obstacle: Area2D = null
 var gameover: bool = false
 var is_started: bool = false
+var previous_enemy: Area2D = null
 var screen_size: Vector2i
 
 @onready var camera: Camera2D = $Camera2D
@@ -30,7 +31,8 @@ func _ready() -> void:
 	is_started = false
 	screen_size = get_window().size
 	create_go_sign()
-	obstacles = obstacles.filter(func(scene): return scene != null)
+	# obstacles = obstacles.filter(func(scene): return scene != null)
+	obstacles.shuffle()
 	GameManager.reduce_health.connect(on_reduce_health.bind())
 	
 
@@ -51,8 +53,10 @@ func create_go_sign() -> void:
 
 
 func restart_game() -> void:
+	is_started = false
 	dino.position = DINO_START_POS
 	create_go_sign()
+	start_timer.start()
 
 
 func spawn_obstacle(scene: PackedScene) -> void:
@@ -64,6 +68,8 @@ func spawn_obstacle(scene: PackedScene) -> void:
 
 
 func spawn_enemy(scene: PackedScene) -> void:
+	if current_enemy != null:
+		previous_enemy = current_enemy
 	var enemy = scene.instantiate()
 	enemy.position = spawns.get_child(1).position
 	add_child(enemy)
@@ -73,34 +79,38 @@ func spawn_enemy(scene: PackedScene) -> void:
 
 func start_game() -> void:
 	is_started = true
+	start_timer.stop()
 	spawn_timer.start()
 	dino.enable_dino()
 
 
-func game_over() -> void:
+func end_game() -> void:
+	spawn_timer.stop()
 	gameover = true
 	if current_obstacle != null:
 		current_obstacle.set_deferred("monitoring", false)
 	if current_enemy != null:
 		current_enemy.set_deferred("monitoring", false)
+	if previous_enemy != null:
+		previous_enemy.set_deferred("monitoring", false)
 	dino.die()
 	
 
 func _on_spawn_timer_timeout() -> void:
-	# var create_enemy := randi_range(0, 2) == 0
-	# if create_enemy:
-		spawn_enemy(bird)
-	# else:
-	# 	spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
+	if not gameover:
+		var create_enemy := randi_range(0, 2) == 0
+		if create_enemy:
+			spawn_enemy(bird)
+		else:
+			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:
 	if area == current_enemy:
-		current_enemy.queue_free()
 		current_enemy = null
 	elif area == current_obstacle:
-		current_obstacle.queue_free()
 		current_obstacle = null
+	area.queue_free()
 	
 
 func _on_despawner_body_entered(body: Node2D) -> void:
@@ -109,4 +119,4 @@ func _on_despawner_body_entered(body: Node2D) -> void:
 
 func on_reduce_health() -> void:
 	if GameManager.current_health == 0:
-		game_over()
+		end_game()
