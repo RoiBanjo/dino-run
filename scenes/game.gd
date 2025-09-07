@@ -120,12 +120,12 @@ func end_game() -> void:
 	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
-		var create_enemy := randi_range(0, 2) == 0
+		var create_enemy := randi_range(0, 10) <= 4
 		if create_enemy:
-			if randi_range(0, 1) == 0:
-				spawn_enemy(bird)
-			else:
+			if randi_range(0, 2) == 0:
 				spawn_enemy(mushroom)
+			else:
+				spawn_enemy(bird)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
 
