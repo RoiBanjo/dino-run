@@ -6,6 +6,7 @@ enum State {IDLE, DUCK, HIT, JUMP, RUN, DIE, WAIT_RESTART}
 
 const DIE_VELOCITY = -800
 const JUMP_VELOCITY = -900.0
+const REBOUND_VELOCITY = -400.0
 
 var current_state: State = State.IDLE
 var animation_map = {
@@ -106,7 +107,7 @@ func on_obstacle_hit(_body: Node2D) -> void:
 
 
 func rebound(_body: Node2D) -> void:
-	print("REBOUND")
+	velocity.y = REBOUND_VELOCITY
 	
 
 func on_hit_animation_end() -> void:
