@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://bntrpn65rgcrn"]
+
+[ext_resource type="Texture2D" uid="uid://bx2k23b3yaan8" path="res://assets/graphics/title/dino_run.png" id="1_fe2o3"]
+[ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://assets/dino_run_theme.tres" id="2_1g8jr"]
+
+[sub_resource type="Gradient" id="Gradient_m1kxf"]
+offsets = PackedFloat32Array(0, 0.4, 0.6, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.5019608, 0.7607843, 0.7607843, 1, 0.5019608, 0.7607843, 0.7607843, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x2yvf"]
+gradient = SubResource("Gradient_m1kxf")
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_x2yvf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+texture = ExtResource("1_fe2o3")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LblStart" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1g8jr")
+theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 30
+text = "START"
+horizontal_alignment = 1
+
+[node name="LblOptions" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1g8jr")
+theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 30
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="LblExit" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1g8jr")
+theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 30
+text = "EXIT"
+horizontal_alignment = 1
