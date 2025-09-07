@@ -23,6 +23,7 @@ theme_override_constants/separation = 250
 
 [node name="HeartContainers" type="HBoxContainer" parent="UITopContainer/Separator"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -39,8 +40,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="LblScore" type="Label" parent="UITopContainer/Separator"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 20
 text = "SCORE: 000000"
@@ -48,8 +50,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LblHighScore" type="Label" parent="UITopContainer/Separator"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 20
 text = "HIGH SCORE: 000000"
