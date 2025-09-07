@@ -1,0 +1,134 @@
+[gd_scene load_steps=11 format=3 uid="uid://d4nrm1b4ugjus"]
+
+[ext_resource type="Script" uid="uid://dkvim6k8dy8v6" path="res://scenes/enemies/mushroom.gd" id="1_1calh"]
+[ext_resource type="Texture2D" uid="uid://dufpb2ety73aa" path="res://assets/graphics/enemies/Mushroom/Mushroom-Idle.png" id="1_2wybx"]
+[ext_resource type="Texture2D" uid="uid://cru7km5nsm48k" path="res://assets/graphics/enemies/Mushroom/Mushroom-Stun.png" id="2_uk2no"]
+
+[sub_resource type="Animation" id="Animation_uk2no"]
+resource_name = "idle"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_1calh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1calh"]
+_data = {
+&"RESET": SubResource("Animation_1calh"),
+&"idle": SubResource("Animation_uk2no")
+}
+
+[sub_resource type="Animation" id="Animation_ubc2v"]
+resource_name = "stun"
+length = 1.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_14jr1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_70lkm"]
+_data = {
+&"RESET": SubResource("Animation_14jr1"),
+&"stun": SubResource("Animation_ubc2v")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1calh"]
+size = Vector2(144, 98)
+
+[node name="Mushroom" type="Area2D"]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 34
+script = ExtResource("1_1calh")
+
+[node name="SpriteIdle" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_2wybx")
+centered = false
+offset = Vector2(-40, -64)
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteIdle"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_1calh")
+}
+autoplay = "idle"
+
+[node name="SpriteStun" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_uk2no")
+centered = false
+offset = Vector2(-40, -64)
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteStun"]
+libraries = {
+&"": SubResource("AnimationLibrary_70lkm")
+}
+autoplay = "stun"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -50)
+shape = SubResource("RectangleShape2D_1calh")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 34
+
+[node name="645try" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(0, -116, -62, -136, -44, -154, -18, -164, 20, -164, 46, -154, 60, -139, 69, -116)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

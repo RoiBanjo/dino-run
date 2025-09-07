@@ -21,6 +21,7 @@ const SPAWN_DELAY: Dictionary = {
 @export_enum("Easy", "Normal", "Hard", "Impossible") var game_difficulty: String
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
+@export var mushroom: PackedScene
 
 var current_enemy: Area2D = null
 var current_obstacle: Area2D = null
@@ -85,7 +86,12 @@ func spawn_enemy(scene: PackedScene) -> void:
 	if current_enemy != null:
 		previous_enemy = current_enemy
 	var enemy = scene.instantiate()
-	enemy.position = spawns.get_child(1).position
+	if enemy.name == "Mushroom":
+		enemy.position = spawns.get_child(2).position
+		if enemy.has_node("Hurtbox"):
+			enemy.get_node("Hurtbox").body_entered.connect(dino.rebound.bind())
+	else:
+		enemy.position = spawns.get_child(1).position
 	add_child(enemy)
 	enemy.body_entered.connect(dino.on_obstacle_hit.bind())
 	current_enemy = enemy
@@ -116,7 +122,10 @@ func _on_spawn_timer_timeout() -> void:
 	if not gameover:
 		var create_enemy := randi_range(0, 2) == 0
 		if create_enemy:
-			spawn_enemy(bird)
+			if randi_range(0, 1) == 0:
+				spawn_enemy(bird)
+			else:
+				spawn_enemy(mushroom)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
 

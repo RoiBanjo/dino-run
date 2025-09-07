@@ -105,6 +105,10 @@ func on_obstacle_hit(_body: Node2D) -> void:
 		GameManager.process_hit()
 
 
+func rebound(_body: Node2D) -> void:
+	print("REBOUND")
+	
+
 func on_hit_animation_end() -> void:
 	if not is_on_floor():
 		change_state(State.JUMP)
