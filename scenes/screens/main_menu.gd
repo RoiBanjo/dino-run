@@ -2,6 +2,9 @@ class_name MainMenu
 extends Node
 
 
+const UNSELECTED_COLOR := Color(0.761, 0.502, 0.0)
+const SELECTED_COLOR := Color.RED
+
 @export var game_scene: PackedScene
 
 var current_index: int = 0
@@ -29,6 +32,9 @@ func refresh_ui() -> void:
 		if current_index == i:
 			selection_icon.position.y = menu_nodes[i].position.y
 			selection_icon.position.x = 420.0
+			menu_nodes[i].set("theme_override_colors/font_color", SELECTED_COLOR)
+		else:
+			menu_nodes[i].set("theme_override_colors/font_color", UNSELECTED_COLOR)
 
 
 func change_index(new_index: int) -> void:
