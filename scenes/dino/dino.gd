@@ -48,17 +48,14 @@ func _physics_process(delta: float) -> void:
 					change_state(State.RUN)
 			State.RUN:
 				if Input.is_action_just_pressed("ui_accept"):
-					velocity.y = JUMP_VELOCITY
-					change_state(State.JUMP)
-					SoundManager.play_sound("sfx_jump")
+					jump()
 				elif Input.is_action_pressed("ui_down"):
 					change_state(State.DUCK)
 			State.DUCK:
 				if Input.is_action_just_released("ui_down"):
 					change_state(State.RUN)
 				if Input.is_action_just_pressed("ui_accept"):
-					velocity.y = JUMP_VELOCITY
-					change_state(State.JUMP)
+					jump()
 			State.HIT:
 				if not is_on_floor():
 					handle_gravity(delta)
@@ -74,6 +71,12 @@ func _physics_process(delta: float) -> void:
 	play_animation()
 	play_run_sfx(delta)
 	move_and_slide()
+
+
+func jump() -> void:
+	velocity.y = JUMP_VELOCITY
+	change_state(State.JUMP)
+	SoundManager.play_sound("sfx_jump")
 
 
 func check_collision_shape() -> void:
