@@ -43,4 +43,5 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	hurt = true
+	SoundManager.play_sound("sfx_bonk")
 	monitoring = false

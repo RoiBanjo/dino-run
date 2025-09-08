@@ -16,7 +16,7 @@
 
 [node name="Level" type="Node"]
 script = ExtResource("1_lbhrr")
-game_difficulty = "Easy"
+game_difficulty = "Normal"
 obstacles = Array[PackedScene]([ExtResource("6_p57ef"), ExtResource("3_dinhu"), ExtResource("2_u5sy4"), ExtResource("4_gee14"), ExtResource("5_0tnpc")])
 bird = ExtResource("7_kvuet")
 mushroom = ExtResource("8_kvuet")

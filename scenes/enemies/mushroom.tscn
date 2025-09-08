@@ -4,6 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://dufpb2ety73aa" path="res://assets/graphics/enemies/Mushroom/Mushroom-Idle.png" id="1_2wybx"]
 [ext_resource type="Texture2D" uid="uid://cru7km5nsm48k" path="res://assets/graphics/enemies/Mushroom/Mushroom-Stun.png" id="2_uk2no"]
 
+[sub_resource type="Animation" id="Animation_1calh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_uk2no"]
 resource_name = "idle"
 length = 0.7
@@ -22,12 +37,18 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
-[sub_resource type="Animation" id="Animation_1calh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1calh"]
+_data = {
+&"RESET": SubResource("Animation_1calh"),
+&"idle": SubResource("Animation_uk2no")
+}
+
+[sub_resource type="Animation" id="Animation_14jr1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteIdle:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,12 +56,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1calh"]
-_data = {
-&"RESET": SubResource("Animation_1calh"),
-&"idle": SubResource("Animation_uk2no")
 }
 
 [sub_resource type="Animation" id="Animation_ubc2v"]
@@ -59,21 +74,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
-}
-
-[sub_resource type="Animation" id="Animation_14jr1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_70lkm"]

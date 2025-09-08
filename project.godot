@@ -15,9 +15,14 @@ run/main_scene="uid://bntrpn65rgcrn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://i76rfhq3xgt"
 
+[audio]
+
+buses/default_bus_layout="res://resources/default_bus_layout.tres"
+
 [autoload]
 
 GameManager="*res://scenes/managers/game_manager.gd"
+SoundManager="*res://scenes/managers/sound_manager.tscn"
 
 [display]
 
@@ -28,6 +33,7 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://assets/": "yellow",
+"res://resources/": "purple",
 "res://scenes/": "red"
 }
 
