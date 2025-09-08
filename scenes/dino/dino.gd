@@ -56,6 +56,9 @@ func _physics_process(delta: float) -> void:
 			State.DUCK:
 				if Input.is_action_just_released("ui_down"):
 					change_state(State.RUN)
+				if Input.is_action_just_pressed("ui_accept"):
+					velocity.y = JUMP_VELOCITY
+					change_state(State.JUMP)
 			State.HIT:
 				if not is_on_floor():
 					handle_gravity(delta)
