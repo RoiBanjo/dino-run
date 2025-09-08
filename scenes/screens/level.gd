@@ -7,15 +7,15 @@ const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
 const GAME_SPEED: Dictionary = {
 	"Easy": 10.0,
-	"Normal": 20.0,
-	"Hard": 20.0,
-	"Impossible": 30.0,
+	"Normal": 15.0,
+	"Hard": 15.0,
+	"Impossible": 20.0,
 }
 const SPAWN_DELAY: Dictionary = {
-	"Easy": 2.0,
-	"Normal": 2.0,
-	"Hard": 1.0,
-	"Impossible": 1.0,
+	"Easy": 3.0,
+	"Normal": 2.5,
+	"Hard": 2.0,
+	"Impossible": 1.5,
 }
 
 @export_enum("Easy", "Normal", "Hard", "Impossible") var game_difficulty: String
