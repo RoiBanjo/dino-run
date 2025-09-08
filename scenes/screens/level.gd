@@ -7,7 +7,7 @@ const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
 const GAME_SPEED: Dictionary = {
 	"Easy": 10.0,
-	"Normal": 15.0,
+	"Normal": 10.0,
 	"Hard": 15.0,
 	"Impossible": 20.0,
 }
