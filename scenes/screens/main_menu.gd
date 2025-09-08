@@ -14,6 +14,7 @@ var current_index: int = 0
 
 
 func _ready() -> void:
+	SoundManager.play_music(SoundManager.Music.MENU)
 	refresh_ui()
 
 

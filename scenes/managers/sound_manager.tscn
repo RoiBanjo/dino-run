@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbtw8qu0vhiv3"]
+[gd_scene load_steps=7 format=3 uid="uid://cbtw8qu0vhiv3"]
 
 [ext_resource type="Script" uid="uid://do1gs2ajxd10c" path="res://scenes/managers/sound_manager.gd" id="1_4jqpw"]
 [ext_resource type="AudioStream" uid="uid://dbg2plq1ui7jv" path="res://assets/sfx/basic-retro-jump.wav" id="1_b57pc"]
 [ext_resource type="AudioStream" uid="uid://uftch7qrcwtk" path="res://assets/sfx/grassy-footstep-1.wav" id="2_4jqpw"]
 [ext_resource type="AudioStream" uid="uid://da50wi8wg5wi4" path="res://assets/sfx/hit-1-8-bit.wav" id="4_u7865"]
 [ext_resource type="AudioStream" uid="uid://dcka60h8263ds" path="res://assets/sfx/b1.ogg" id="5_3gh4x"]
+[ext_resource type="AudioStream" uid="uid://bc15ppo0b5dyn" path="res://assets/sfx/lose_c_05.wav" id="6_3gh4x"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_4jqpw")
@@ -23,3 +24,9 @@ stream = ExtResource("4_u7865")
 
 [node name="SFXbonk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_3gh4x")
+
+[node name="SFXlose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3gh4x")
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

@@ -49,6 +49,7 @@ func _ready() -> void:
 	obstacles.shuffle()
 	GameManager.reduce_health.connect(on_reduce_health.bind())
 	speed = GAME_SPEED[game_difficulty]
+	SoundManager.play_music(SoundManager.Music.LEVEL)
 	
 
 func _physics_process(_delta: float) -> void:
@@ -105,6 +106,8 @@ func start_game() -> void:
 
 
 func end_game() -> void:
+	SoundManager.stop_music()
+	SoundManager.play_sound("sfx_lose")
 	spawn_timer.stop()
 	gameover = true
 	if current_obstacle != null:
