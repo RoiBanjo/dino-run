@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bntrpn65rgcrn"]
+[gd_scene load_steps=11 format=3 uid="uid://bntrpn65rgcrn"]
 
+[ext_resource type="Script" uid="uid://dxumtt8f8tsh3" path="res://scenes/ui/main_menu.gd" id="1_1g8jr"]
 [ext_resource type="Texture2D" uid="uid://bx2k23b3yaan8" path="res://assets/graphics/title/dino_run.png" id="1_fe2o3"]
 [ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://assets/dino_run_theme.tres" id="2_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://c8b3b2j48wy2v" path="res://scenes/game.tscn" id="2_x2yvf"]
+[ext_resource type="Texture2D" uid="uid://c1kdx4s6g1rs" path="res://assets/graphics/dinos/DinoSprites - mort.png" id="4_m1kxf"]
 
 [sub_resource type="Gradient" id="Gradient_m1kxf"]
 offsets = PackedFloat32Array(0, 0.4, 0.6, 1)
@@ -11,16 +14,50 @@ metadata/_snap_enabled = true
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_x2yvf"]
 gradient = SubResource("Gradient_m1kxf")
 
-[node name="Main Menu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="Animation" id="Animation_m1kxf"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_x2yvf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhagc"]
+_data = {
+&"RESET": SubResource("Animation_x2yvf"),
+&"default": SubResource("Animation_m1kxf")
+}
+
+[node name="Main Menu" type="Node"]
+script = ExtResource("1_1g8jr")
+game_scene = ExtResource("2_x2yvf")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,7 +66,6 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_x2yvf")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,7 +92,24 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 alignment = 1
 
+[node name="SelectionIcon" type="Sprite2D" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-10, -488)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_m1kxf")
+centered = false
+hframes = 24
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/VBoxContainer/SelectionIcon"]
+libraries = {
+&"": SubResource("AnimationLibrary_uhagc")
+}
+autoplay = "default"
+
 [node name="LblStart" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_1g8jr")
 theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
@@ -67,6 +120,7 @@ text = "START"
 horizontal_alignment = 1
 
 [node name="LblOptions" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_1g8jr")
 theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
@@ -77,6 +131,7 @@ text = "OPTIONS"
 horizontal_alignment = 1
 
 [node name="LblExit" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_1g8jr")
 theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
