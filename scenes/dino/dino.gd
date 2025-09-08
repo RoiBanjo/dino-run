@@ -9,7 +9,6 @@ const JUMP_VELOCITY = -900.0
 const REBOUND_VELOCITY = -400.0
 const RUN_SFX_INTERVAL := 0.3
 
-var current_state: State = State.IDLE
 var animation_map = {
 	State.IDLE: "idle",
 	State.DUCK: "duck",
@@ -19,6 +18,7 @@ var animation_map = {
 	State.DIE: "die",
 	State.WAIT_RESTART: "wait_restart"
 }
+var current_state: State = State.IDLE
 var is_enabled: bool = false
 var run_sfx_timer := 0.0
 
@@ -120,17 +120,17 @@ func change_state(new_state: State) -> void:
 	current_state = new_state
 
 
+func rebound(_body: Node2D) -> void:
+	velocity.y = REBOUND_VELOCITY
+
+
 func on_obstacle_hit(_body: Node2D) -> void:
 	if current_state != State.HIT and current_state != State.DIE and current_state != State.WAIT_RESTART:
 		change_state(State.HIT)
 		SoundManager.play_sound("sfx_hit", true)
 		GameManager.process_hit()
 
-
-func rebound(_body: Node2D) -> void:
-	velocity.y = REBOUND_VELOCITY
 	
-
 func on_hit_animation_end() -> void:
 	if not is_on_floor():
 		change_state(State.JUMP)

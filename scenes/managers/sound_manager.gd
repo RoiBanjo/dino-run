@@ -7,14 +7,14 @@ const MUSIC_MAP: Dictionary = {
 	Music.LEVEL: preload("uid://bnkogmtky3wil"),
 }
 
+var autoplay_music: AudioStream = null
+
 @onready var music_stream_player: AudioStreamPlayer = $MusicStreamPlayer
 @onready var sfx_jump: AudioStreamPlayer = $SFXjump
 @onready var sfx_run: AudioStreamPlayer = $SFXrun
 @onready var sfx_hit: AudioStreamPlayer = $SFXhit
 @onready var sfx_bonk: AudioStreamPlayer = $SFXbonk
 @onready var sfx_lose: AudioStreamPlayer = $SFXlose
-
-var autoplay_music: AudioStream = null
 
 
 func _ready() -> void:
