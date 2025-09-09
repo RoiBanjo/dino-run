@@ -45,9 +45,7 @@ func _ready() -> void:
 	is_started = false
 	screen_size = get_window().size
 	create_go_sign()
-	# obstacles = obstacles.filter(func(scene): return scene != null)
 	obstacles.shuffle()
-	GameManager.reduce_health.connect(on_reduce_health.bind())
 	speed = GAME_SPEED[game_difficulty]
 	SoundManager.play_music(SoundManager.Music.LEVEL)
 	
@@ -70,16 +68,22 @@ func create_go_sign() -> void:
 
 func restart_game() -> void:
 	is_started = false
-	dino.position = DINO_START_POS
+	dino.reset()
 	create_go_sign()
+	if current_enemy != null:
+		current_enemy = null
+	if previous_enemy != null:
+		previous_enemy = null
+	if current_obstacle != null:
+		current_obstacle = null
 	start_timer.start()
-
+	
 
 func spawn_obstacle(scene: PackedScene) -> void:
 	var obstacle = scene.instantiate()
 	obstacle.position = spawns.get_child(2).position
 	add_child(obstacle)
-	obstacle.body_entered.connect(dino.on_obstacle_hit.bind())
+	obstacle.body_entered.connect(on_dino_hit.bind())
 	current_obstacle = obstacle
 
 
@@ -94,7 +98,7 @@ func spawn_enemy(scene: PackedScene) -> void:
 	else:
 		enemy.position = spawns.get_child(1).position
 	add_child(enemy)
-	enemy.body_entered.connect(dino.on_obstacle_hit.bind())
+	enemy.body_entered.connect(on_dino_hit.bind())
 	current_enemy = enemy
 
 
@@ -145,6 +149,8 @@ func _on_despawner_body_entered(body: Node2D) -> void:
 	body.queue_free()
 
 
-func on_reduce_health() -> void:
+func on_dino_hit(_body: Node2D) -> void:
+	dino.hit()
+	camera.shake()
 	if GameManager.current_health == 0:
 		end_game()

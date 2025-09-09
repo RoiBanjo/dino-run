@@ -116,6 +116,13 @@ func die() -> void:
 	velocity.y = DIE_VELOCITY
 
 
+func reset() -> void:
+	sprite.flip_v = false
+	collision_duck.disabled = true
+	is_enabled = false
+	change_state(State.IDLE)
+	
+
 func change_state(new_state: State) -> void:
 	current_state = new_state
 
@@ -124,7 +131,7 @@ func rebound(_body: Node2D) -> void:
 	velocity.y = REBOUND_VELOCITY
 
 
-func on_obstacle_hit(_body: Node2D) -> void:
+func hit() -> void:
 	if current_state != State.HIT and current_state != State.DIE and current_state != State.WAIT_RESTART:
 		change_state(State.HIT)
 		SoundManager.play_sound("sfx_hit", true)
