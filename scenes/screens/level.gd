@@ -1,24 +1,25 @@
 extends Node
 
+enum Diff {EASY, NORMAL, HARD, IMPOSSIBLE}
 
 const DINO_START_POS := Vector2i(100, 554)
 const CAMERA_START_POS := Vector2i(576, 324)
 const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
 const GAME_SPEED: Dictionary = {
-	"Easy": 10.0,
-	"Normal": 10.0,
-	"Hard": 15.0,
-	"Impossible": 20.0,
+	Diff.EASY: 10.0,
+	Diff.NORMAL: 10.0,
+	Diff.HARD: 15.0,
+	Diff.IMPOSSIBLE: 20.0,
 }
 const SPAWN_DELAY: Dictionary = {
-	"Easy": 3.0,
-	"Normal": 2.5,
-	"Hard": 2.0,
-	"Impossible": 1.5,
+	Diff.EASY: 3.0,
+	Diff.NORMAL: 2.5,
+	Diff.HARD: 2.0,
+	Diff.IMPOSSIBLE: 1.5,
 }
 
-@export_enum("Easy", "Normal", "Hard", "Impossible") var game_difficulty: String
+@export_enum("EASY", "NORMAL", "HARD", "IMPOSSIBLE") var game_difficulty
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
 @export var mushroom: PackedScene
