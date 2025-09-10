@@ -40,6 +40,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="LblScore" type="Label" parent="UITopContainer/Separator"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -50,6 +51,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LblHighScore" type="Label" parent="UITopContainer/Separator"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
