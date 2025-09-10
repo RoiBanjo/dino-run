@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://clt82kibdhje2"]
+
+[ext_resource type="Texture2D" uid="uid://d2shxrouo06cf" path="res://assets/graphics/objects/boxes/4.png" id="2_vhiqg"]
+[ext_resource type="Texture2D" uid="uid://cb13jjrwjbcy4" path="res://assets/graphics/objects/boxes/5.png" id="3_626wi"]
+[ext_resource type="Texture2D" uid="uid://dwp0v77o5qcf8" path="res://assets/graphics/objects/boxes/2.png" id="3_r1wro"]
+
+[node name="Boxes" type="Area2D"]
+collision_layer = 8
+collision_mask = 34
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(93, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vhiqg")
+centered = false
+offset = Vector2(-13, -26)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(77, -150)
+scale = Vector2(3, 3)
+texture = ExtResource("3_626wi")
+centered = false
+offset = Vector2(-13, -26)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(91, -72)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vhiqg")
+centered = false
+offset = Vector2(-13, -26)
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vhiqg")
+centered = false
+offset = Vector2(-13, -26)
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4, -73)
+scale = Vector2(3, 3)
+texture = ExtResource("3_r1wro")
+centered = false
+offset = Vector2(-13, -26)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-40, 1, -39, -147, 42, -147, 42, -225, 126, -225, 142, -151, 151, -151, 150, 3)
