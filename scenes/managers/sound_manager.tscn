@@ -39,4 +39,5 @@ stream = ExtResource("8_uo420")
 bus = &"SFX"
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 bus = &"Music"

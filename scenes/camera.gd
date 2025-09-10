@@ -10,7 +10,7 @@ var shake_timer: int = 0
 
 
 func _physics_process(_delta: float) -> void:
-	if is_shaking:
+	if is_shaking and OptionsManager.is_screenshake_enabled:
 		offset = Vector2(0.0, randf_range(-SHAKE_INTENSITY, SHAKE_INTENSITY))
 		if Time.get_ticks_msec() - shake_timer > SHAKE_DURATION:
 			is_shaking = false

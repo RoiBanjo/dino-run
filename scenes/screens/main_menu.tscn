@@ -48,6 +48,7 @@ _data = {
 }
 
 [node name="Main Menu" type="Node"]
+process_mode = 1
 script = ExtResource("1_1g8jr")
 dino_selection = ExtResource("2_e21yp")
 

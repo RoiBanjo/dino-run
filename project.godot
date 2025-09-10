@@ -23,6 +23,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 GameManager="*res://scenes/managers/game_manager.gd"
 SoundManager="*res://scenes/managers/sound_manager.tscn"
+OptionsManager="*res://scenes/managers/options_manager.gd"
 
 [display]
 

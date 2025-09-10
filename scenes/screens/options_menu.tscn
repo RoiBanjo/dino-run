@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://b28h31237odhy"]
+
+[ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://resources/dino_run_theme.tres" id="1_dhmbl"]
+[ext_resource type="Script" uid="uid://biwtu5ktj848f" path="res://scenes/screens/options_menu.gd" id="1_isgeu"]
+
+[sub_resource type="Curve" id="Curve_x72ft"]
+_data = [Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_dhmbl"]
+curve = SubResource("Curve_x72ft")
+
+[sub_resource type="Curve" id="Curve_dhmbl"]
+_data = [Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_isgeu"]
+curve = SubResource("Curve_dhmbl")
+
+[node name="OptionsMenu" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_isgeu")
+
+[node name="FadeBackground" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CurveTexture_dhmbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -200.0
+offset_right = 225.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = SubResource("CurveTexture_isgeu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SFXContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="LblSFX" type="Label" parent="MarginContainer/VBoxContainer/SFXContainer"]
+layout_mode = 2
+theme = ExtResource("1_dhmbl")
+text = "SFX VOLUME"
+
+[node name="SliderSFX" type="HSlider" parent="MarginContainer/VBoxContainer/SFXContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../BtnReturn")
+focus_neighbor_bottom = NodePath("../../MusicContainer/SliderMusic")
+theme = ExtResource("1_dhmbl")
+max_value = 10.0
+value = 8.0
+rounded = true
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="MusicContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="LblMusic" type="Label" parent="MarginContainer/VBoxContainer/MusicContainer"]
+layout_mode = 2
+theme = ExtResource("1_dhmbl")
+text = "MUSIC VOLUME"
+
+[node name="SliderMusic" type="HSlider" parent="MarginContainer/VBoxContainer/MusicContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../SFXContainer/SliderSFX")
+focus_neighbor_bottom = NodePath("../../ShakeContainer/ChkShake")
+theme = ExtResource("1_dhmbl")
+max_value = 10.0
+value = 4.0
+rounded = true
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="ShakeContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="LblShake" type="Label" parent="MarginContainer/VBoxContainer/ShakeContainer"]
+layout_mode = 2
+theme = ExtResource("1_dhmbl")
+text = "SCREEEN SHAKE"
+
+[node name="ChkShake" type="CheckBox" parent="MarginContainer/VBoxContainer/ShakeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../../MusicContainer/SliderMusic")
+focus_neighbor_bottom = NodePath("../../BtnReturn")
+theme = ExtResource("1_dhmbl")
+button_pressed = true
+
+[node name="BtnReturn" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ShakeContainer/ChkShake")
+focus_neighbor_bottom = NodePath("../SFXContainer/SliderSFX")
+theme = ExtResource("1_dhmbl")
+text = "RETURN"

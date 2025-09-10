@@ -52,6 +52,11 @@ func _ready() -> void:
 	dino.change_texture(GameManager.selected_dino)
 	
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		open_options_menu()
+
+
 func _physics_process(_delta: float) -> void:
 	if is_started and not gameover:
 		dino.position.x += speed
@@ -126,6 +131,14 @@ func end_game() -> void:
 		previous_enemy.stop_movement = true
 	dino.die()
 	
+
+func open_options_menu() -> void:
+	var options_menu: OptionsMenu = OptionsManager.OPTIONS_MENU_PREFAB.instantiate()
+	options_menu.option_menu_exit.connect(on_option_menu_exit.bind())
+	options_menu.position = camera.position - Vector2(CAMERA_START_POS)
+	get_tree().paused = true
+	add_child(options_menu)
+	
 	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
@@ -156,3 +169,7 @@ func on_dino_hit(_body: Node2D) -> void:
 	camera.shake()
 	if GameManager.current_health == 0:
 		end_game()
+
+
+func on_option_menu_exit() -> void:
+	get_tree().paused = false
