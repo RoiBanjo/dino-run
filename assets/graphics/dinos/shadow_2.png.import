@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp5npv5hlcusv"
-path="res://.godot/imported/3.png-05c45dda96f34d6ebbe5ed751482a69a.ctex"
+uid="uid://dss0brsxfow1r"
+path="res://.godot/imported/shadow_2.png-893c78182fd3c97b202967d31018afec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/objects/bushes/3.png"
-dest_files=["res://.godot/imported/3.png-05c45dda96f34d6ebbe5ed751482a69a.ctex"]
+source_file="res://assets/graphics/dinos/shadow_2.png"
+dest_files=["res://.godot/imported/shadow_2.png-893c78182fd3c97b202967d31018afec.ctex"]
 
 [params]
 
