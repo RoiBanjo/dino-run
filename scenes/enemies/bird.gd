@@ -2,7 +2,7 @@ class_name Bird
 extends Area2D
 
 
-const FLOAT_AMPLITUDE := 60.0 # Range of movement in pixels
+const FLOAT_AMPLITUDE := 70.0 # Range of movement in pixels
 const FLOAT_FREQUENCY := 6.0 # Speed of oscillation
 
 var initial_y := 0.0

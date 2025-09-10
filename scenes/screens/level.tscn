@@ -55,7 +55,7 @@ unique_name_in_owner = true
 [node name="Despawner" parent="Spawns" instance=ExtResource("5_u5sy4")]
 
 [node name="SpawnTop" type="Marker2D" parent="Spawns"]
-position = Vector2(1452, 320)
+position = Vector2(1452, 300)
 
 [node name="SpawnBottom" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 552)
