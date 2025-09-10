@@ -20,8 +20,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
+		SoundManager.play_sound("sfx_uinav")
 		change_index(current_index - 1)
 	elif Input.is_action_just_pressed("ui_down"):
+		SoundManager.play_sound("sfx_uinav")
 		change_index(current_index + 1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		submit_selection()
@@ -43,6 +45,7 @@ func change_index(new_index: int) -> void:
 
 
 func submit_selection() -> void:
+	SoundManager.play_sound("sfx_uiselect")
 	match current_index:
 		0:
 			get_tree().change_scene_to_packed(game_scene)

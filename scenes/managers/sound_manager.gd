@@ -15,6 +15,8 @@ var autoplay_music: AudioStream = null
 @onready var sfx_hit: AudioStreamPlayer = $SFXhit
 @onready var sfx_bonk: AudioStreamPlayer = $SFXbonk
 @onready var sfx_lose: AudioStreamPlayer = $SFXlose
+@onready var sfx_uinav: AudioStreamPlayer = $SFXUINav
+@onready var sfx_uiselect: AudioStreamPlayer = $SFXUISelect
 
 
 func _ready() -> void:
