@@ -25,11 +25,13 @@ var run_sfx_timer := 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_run: CollisionShape2D = $CollisionShapeRun
 @onready var collision_duck: CollisionShape2D = $CollisionShapeDuck
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var ray_shadow: RayCast2D = %RayShadow
+@onready var sprite_dino: Sprite2D = $Sprite2D
+@onready var sprite_shadow: Sprite2D = %ShadowSprite
 
 
 func _ready() -> void:
-	sprite.flip_v = false
+	sprite_dino.flip_v = false
 	collision_duck.disabled = true
 	is_enabled = false
 	change_state(State.IDLE)
@@ -71,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	play_animation()
 	play_run_sfx(delta)
 	move_and_slide()
+	render_shadow()
 
 
 func jump() -> void:
@@ -117,7 +120,7 @@ func die() -> void:
 
 
 func reset() -> void:
-	sprite.flip_v = false
+	sprite_dino.flip_v = false
 	collision_duck.disabled = true
 	is_enabled = false
 	change_state(State.IDLE)
@@ -129,6 +132,15 @@ func change_state(new_state: State) -> void:
 
 func rebound(_body: Node2D) -> void:
 	velocity.y = REBOUND_VELOCITY
+
+
+func render_shadow() -> void:
+	if ray_shadow.is_colliding():
+		sprite_shadow.global_position.y = ray_shadow.get_collision_point().y - 20
+		var height_ratio: float = clamp(1.0 - sprite_shadow.position.y / 30.0, 0.1, 0.8)
+		sprite_shadow.modulate.a = height_ratio
+		var shadow_scale: float = max(height_ratio, 0.6)
+		sprite_shadow.scale = Vector2(shadow_scale, shadow_scale)
 
 
 func hit() -> void:

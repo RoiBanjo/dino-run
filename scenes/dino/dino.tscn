@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cslk0aajw4nlu"]
+[gd_scene load_steps=15 format=3 uid="uid://cslk0aajw4nlu"]
 
 [ext_resource type="Script" uid="uid://cyfvtf67yrwh4" path="res://scenes/dino/dino.gd" id="1_xtykj"]
 [ext_resource type="Texture2D" uid="uid://c1kdx4s6g1rs" path="res://assets/graphics/dinos/DinoSprites - mort.png" id="2_xtykj"]
+[ext_resource type="Texture2D" uid="uid://dss0brsxfow1r" path="res://assets/graphics/dinos/shadow_2.png" id="3_nddxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtykj"]
 size = Vector2(80, 125)
@@ -203,6 +204,7 @@ collision_mask = 29
 script = ExtResource("1_xtykj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 position = Vector2(-95, -160)
 scale = Vector2(8, 8)
@@ -224,3 +226,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_cm5t2")
 }
 autoplay = "idle"
+
+[node name="Shadow" type="Node2D" parent="."]
+scale = Vector2(6, 6)
+
+[node name="ShadowSprite" type="Sprite2D" parent="Shadow"]
+unique_name_in_owner = true
+texture_filter = 2
+texture = ExtResource("3_nddxa")
+
+[node name="RayShadow" type="RayCast2D" parent="Shadow"]
+unique_name_in_owner = true
+target_position = Vector2(0, 100)
+hit_from_inside = true
