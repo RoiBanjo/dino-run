@@ -9,6 +9,12 @@ const JUMP_VELOCITY = -900.0
 const REBOUND_VELOCITY = -400.0
 const RUN_SFX_INTERVAL := 0.3
 
+const TEXTURE_RED := preload("uid://c1kdx4s6g1rs")
+const TEXTURE_GREEN := preload("uid://me55bdpts0ps")
+const TEXTURE_YELLOW := preload("uid://c2ob8ar2w0rnc")
+const TEXTURE_BLUE := preload("uid://brqnabsw7je7h")
+
+
 var animation_map = {
 	State.IDLE: "idle",
 	State.DUCK: "duck",
@@ -28,9 +34,11 @@ var run_sfx_timer := 0.0
 @onready var ray_shadow: RayCast2D = %RayShadow
 @onready var sprite_dino: Sprite2D = $Sprite2D
 @onready var sprite_shadow: Sprite2D = %ShadowSprite
+@onready var textures_array: Array = [TEXTURE_RED, TEXTURE_GREEN, TEXTURE_YELLOW, TEXTURE_BLUE]
 
 
 func _ready() -> void:
+	change_texture(GameManager.selected_dino)
 	sprite_dino.flip_v = false
 	collision_duck.disabled = true
 	is_enabled = false
@@ -141,6 +149,15 @@ func render_shadow() -> void:
 		sprite_shadow.modulate.a = height_ratio
 		var shadow_scale: float = max(height_ratio, 0.6)
 		sprite_shadow.scale = Vector2(shadow_scale, shadow_scale)
+
+
+func disable_shadow() -> void:
+	sprite_shadow.visible = false
+	ray_shadow.enabled = false
+
+
+func change_texture(index: int) -> void:
+	sprite_dino.texture = textures_array[index]
 
 
 func hit() -> void:

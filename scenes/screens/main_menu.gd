@@ -5,7 +5,7 @@ extends Node
 const UNSELECTED_COLOR := Color(0.761, 0.502, 0.0)
 const SELECTED_COLOR := Color.RED
 
-@export var game_scene: PackedScene
+@export var dino_selection: PackedScene
 
 var current_index: int = 0
 
@@ -48,7 +48,7 @@ func submit_selection() -> void:
 	SoundManager.play_sound("sfx_uiselect")
 	match current_index:
 		0:
-			get_tree().change_scene_to_packed(game_scene)
+			get_tree().change_scene_to_packed(dino_selection)
 		1:
 			print("SUBMIT")
 		2:

@@ -49,6 +49,7 @@ func _ready() -> void:
 	obstacles.shuffle()
 	speed = GAME_SPEED[game_difficulty]
 	SoundManager.play_music(SoundManager.Music.LEVEL)
+	dino.change_texture(GameManager.selected_dino)
 	
 
 func _physics_process(_delta: float) -> void:

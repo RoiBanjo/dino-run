@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds723w14t5x34"]
+
+[ext_resource type="Script" uid="uid://dvlqxeysj238x" path="res://scenes/screens/dino_select.gd" id="1_t0lh6"]
+[ext_resource type="Texture2D" uid="uid://bd1ksl5o8q8hq" path="res://assets/graphics/background/plx-1.png" id="1_y72fl"]
+[ext_resource type="Texture2D" uid="uid://cqewj18mmrl3n" path="res://assets/graphics/background/plx-3.png" id="2_qnbkt"]
+[ext_resource type="PackedScene" uid="uid://c8b3b2j48wy2v" path="res://scenes/screens/level.tscn" id="2_t0lh6"]
+[ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://resources/dino_run_theme.tres" id="3_qnbkt"]
+[ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dino/dino.tscn" id="5_t0lh6"]
+[ext_resource type="PackedScene" uid="uid://clw8ge64wevky" path="res://scenes/ui/arrow.tscn" id="5_t6o1y"]
+
+[node name="DinoSelect" type="Node"]
+script = ExtResource("1_t0lh6")
+level = ExtResource("2_t0lh6")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y72fl")
+
+[node name="Background2" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qnbkt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LblSelect" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_qnbkt")
+theme_override_colors/font_color = Color(0.7607843, 0.5019608, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 30
+text = "SELECT YOUR DINO"
+horizontal_alignment = 1
+
+[node name="SelectContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/SelectContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ArrowL" parent="VBoxContainer/SelectContainer/HBoxContainer" instance=ExtResource("5_t6o1y")]
+unique_name_in_owner = true
+position = Vector2(-150, -50)
+selected_texture = 0
+
+[node name="Dino" parent="VBoxContainer/SelectContainer/HBoxContainer" instance=ExtResource("5_t0lh6")]
+unique_name_in_owner = true
+
+[node name="ArrowR" parent="VBoxContainer/SelectContainer/HBoxContainer" instance=ExtResource("5_t6o1y")]
+unique_name_in_owner = true
+position = Vector2(150, -50)
+selected_texture = 1
