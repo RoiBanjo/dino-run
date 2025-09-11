@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://c8b3b2j48wy2v"]
 
-[ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/screens/level.gd" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://ckmpisibeeu6i" path="res://scenes/screens/level/level.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://byu4a5u5iemas" path="res://scenes/environment/background.tscn" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://fx3lii7khy3j" path="res://scenes/obstacles/rock_small.tscn" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cjc5yac873xti" path="res://scenes/obstacles/stump_wide.tscn" id="3_dinhu"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://clt82kibdhje2" path="res://scenes/obstacles/boxes.tscn" id="7_lb4k8"]
 [ext_resource type="PackedScene" uid="uid://d4nrm1b4ugjus" path="res://scenes/enemies/mushroom.tscn" id="8_kvuet"]
 [ext_resource type="PackedScene" uid="uid://cfp860s7n5mca" path="res://scenes/ui/ui.tscn" id="10_vtaks"]
-[ext_resource type="Script" uid="uid://ldda570cioc4" path="res://scenes/camera.gd" id="12_lpofq"]
+[ext_resource type="Script" uid="uid://ldda570cioc4" path="res://scenes/screens/level/camera.gd" id="12_lpofq"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_lbhrr")
