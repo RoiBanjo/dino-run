@@ -50,10 +50,11 @@ func _ready() -> void:
 	speed = GAME_SPEED[game_difficulty]
 	SoundManager.play_music(SoundManager.Music.LEVEL)
 	dino.change_texture(GameManager.selected_dino)
+	ui.start_ready_timer()
 	
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+	if ui.ready_timer.is_stopped() and Input.is_action_just_pressed("ui_cancel"):
 		open_options_menu()
 
 
@@ -84,6 +85,7 @@ func restart_game() -> void:
 	if current_obstacle != null:
 		current_obstacle = null
 	start_timer.start()
+	ui.start_ready_timer()
 	
 
 func spawn_obstacle(scene: PackedScene) -> void:
