@@ -21,13 +21,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):
-		arrow_left.play_select()
-		selection_index -= 1
-		if selection_index < 0: selection_index = dino.textures_array.size() - 1
+		change_selection(-1)
 	elif Input.is_action_just_pressed("ui_right"):
-		arrow_right.play_select()
-		selection_index += 1
-		if selection_index >= dino.textures_array.size(): selection_index = 0
+		change_selection(1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		SoundManager.play_sound("sfx_uiselect")
 		GameManager.selected_dino = selection_index
@@ -35,4 +31,16 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_cancel"):
 		SoundManager.play_sound("sfx_uiselect")
 		get_tree().change_scene_to_packed(main_menu)
+
+
+func change_selection(new_index: int) -> void:
+	if new_index == -1:
+		arrow_left.play_select()
+	elif new_index == 1:
+		arrow_right.play_select()
+	selection_index += new_index
+	if selection_index < 0:
+		selection_index = dino.textures_array.size() - 1
+	elif selection_index >= dino.textures_array.size():
+		selection_index = 0
 	dino.change_texture(selection_index)
