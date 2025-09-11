@@ -14,15 +14,23 @@ var label_counter := 0
 
 func _ready() -> void:
 	GameManager.reduce_health.connect(on_reduce_health.bind())
-	high_score_lbl.text = "HIGH SCORE: %s" % add_trailing_zeros(GameManager.high_score)
-	score_lbl.text = "SCORE: %s" % add_trailing_zeros(GameManager.current_score)
 	ready_timer.timeout.connect(on_ready_timer_timeout.bind())
+	update_scores()
 	advance_ready_label()
 	
+
+func _process(_delta: float) -> void:
+	update_scores()
+
 
 func start_ready_timer() -> void:
 	ready_timer.start()
 	
+
+func update_scores() -> void:
+	score_lbl.text = "SCORE: %s" % add_trailing_zeros(GameManager.current_score)
+	high_score_lbl.text = "HIGH SCORE: %s" % add_trailing_zeros(GameManager.high_score)
+
 
 func advance_ready_label() -> void:
 	if label_counter == 0:

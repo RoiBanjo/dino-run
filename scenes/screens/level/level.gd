@@ -12,6 +12,7 @@ const GAME_SPEED: Dictionary = {
 	Diff.HARD: 15.0,
 	Diff.IMPOSSIBLE: 20.0,
 }
+const SCORE_TICK := 100
 const SPAWN_DELAY: Dictionary = {
 	Diff.EASY: 3.0,
 	Diff.NORMAL: 2.5,
@@ -29,6 +30,7 @@ var current_obstacle: Area2D = null
 var gameover: bool = false
 var is_started: bool = false
 var previous_enemy: Area2D = null
+var score_timer: int = 0
 var screen_size: Vector2i
 var speed := 0.0
 
@@ -42,7 +44,7 @@ var speed := 0.0
 
 
 func _ready() -> void:
-	GameManager.current_health = GameManager.MAX_HEALTH
+	GameManager.reset_starting_values()
 	is_started = false
 	screen_size = get_window().size
 	create_go_sign()
@@ -56,7 +58,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if ui.ready_timer.is_stopped() and Input.is_action_just_pressed("ui_cancel"):
 		open_options_menu()
-
+	if is_started and not gameover:
+		if Time.get_ticks_msec() - score_timer >= SCORE_TICK:
+			GameManager.current_score += 10
+			score_timer = Time.get_ticks_msec()
+			
 
 func _physics_process(_delta: float) -> void:
 	if is_started and not gameover:
@@ -76,6 +82,7 @@ func create_go_sign() -> void:
 
 func restart_game() -> void:
 	is_started = false
+	GameManager.reset_starting_values()
 	dino.reset()
 	create_go_sign()
 	if current_enemy != null:
@@ -116,6 +123,7 @@ func start_game() -> void:
 	start_timer.stop()
 	spawn_timer.start(SPAWN_DELAY[game_difficulty])
 	dino.enable_dino()
+	score_timer = Time.get_ticks_msec()
 
 
 func end_game() -> void:
