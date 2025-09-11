@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfp860s7n5mca"]
 
 [ext_resource type="Script" uid="uid://dlago8q73hxpb" path="res://scenes/ui/ui.gd" id="1_f5cxw"]
-[ext_resource type="PackedScene" uid="uid://pqmkosnnkl1n" path="res://scenes/ui/heart_container.tscn" id="1_u7n8c"]
+[ext_resource type="PackedScene" uid="uid://pqmkosnnkl1n" path="res://scenes/ui/ui_elements/heart_container.tscn" id="1_u7n8c"]
 [ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://resources/dino_run_theme.tres" id="3_aac20"]
 
 [node name="UI" type="CanvasLayer"]

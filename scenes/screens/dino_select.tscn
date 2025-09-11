@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8b3b2j48wy2v" path="res://scenes/screens/level/level.tscn" id="2_t0lh6"]
 [ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://resources/dino_run_theme.tres" id="3_qnbkt"]
 [ext_resource type="PackedScene" uid="uid://cslk0aajw4nlu" path="res://scenes/dino/dino.tscn" id="5_t0lh6"]
-[ext_resource type="PackedScene" uid="uid://clw8ge64wevky" path="res://scenes/ui/arrow.tscn" id="5_t6o1y"]
+[ext_resource type="PackedScene" uid="uid://clw8ge64wevky" path="res://scenes/ui/ui_elements/arrow.tscn" id="5_t6o1y"]
 
 [node name="DinoSelect" type="Node"]
 script = ExtResource("1_t0lh6")

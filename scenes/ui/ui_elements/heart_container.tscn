@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://pqmkosnnkl1n"]
 
 [ext_resource type="Texture2D" uid="uid://dqony1vq3cir0" path="res://assets/graphics/hearts/heart_animated_1.png" id="1_2dtid"]
-[ext_resource type="Script" uid="uid://hussii0bmj6v" path="res://scenes/ui/heart_container.gd" id="1_r5akr"]
+[ext_resource type="Script" uid="uid://hussii0bmj6v" path="res://scenes/ui/ui_elements/heart_container.gd" id="1_r5akr"]
 
 [sub_resource type="Animation" id="Animation_r5akr"]
 length = 0.001

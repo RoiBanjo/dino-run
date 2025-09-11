@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://clw8ge64wevky"]
 
-[ext_resource type="Script" uid="uid://b60ed3tda3b7w" path="res://scenes/ui/arrow.gd" id="1_64f34"]
+[ext_resource type="Script" uid="uid://b60ed3tda3b7w" path="res://scenes/ui/ui_elements/arrow.gd" id="1_64f34"]
 [ext_resource type="Texture2D" uid="uid://28vmuotor0el" path="res://assets/graphics/arrows/arrow-left.png" id="1_kdkpw"]
 
 [sub_resource type="Animation" id="Animation_amtbc"]
