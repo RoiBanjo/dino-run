@@ -57,12 +57,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if ui.ready_timer.is_stopped() and Input.is_action_just_pressed("ui_cancel"):
-		open_options_menu()
+		var camera_position := camera.position - Vector2(CAMERA_START_POS)
+		OptionsManager.open_options_menu(self, camera_position)
 	if is_started and not gameover:
 		if Time.get_ticks_msec() - score_timer >= SCORE_TICK:
 			GameManager.current_score += 10
 			score_timer = Time.get_ticks_msec()
-			
+
 
 func _physics_process(_delta: float) -> void:
 	if is_started and not gameover:
@@ -142,14 +143,6 @@ func end_game() -> void:
 	dino.die()
 	
 
-func open_options_menu() -> void:
-	var options_menu: OptionsMenu = OptionsManager.OPTIONS_MENU_PREFAB.instantiate()
-	options_menu.option_menu_exit.connect(on_option_menu_exit.bind())
-	options_menu.position = camera.position - Vector2(CAMERA_START_POS)
-	get_tree().paused = true
-	add_child(options_menu)
-	
-	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
 		var create_enemy := randi_range(0, 10) <= 4
@@ -179,7 +172,3 @@ func on_dino_hit(_body: Node2D) -> void:
 	camera.shake()
 	if GameManager.current_health == 0:
 		end_game()
-
-
-func on_option_menu_exit() -> void:
-	get_tree().paused = false

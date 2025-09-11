@@ -12,6 +12,14 @@ func _enter_tree() -> void:
 	set_music_volume(music_volume)
 	set_sfx_volume(sfx_volume)
 
+
+func open_options_menu(caller: Node, window_position: Vector2 = Vector2.ZERO) -> void:
+	var options_menu: OptionsMenu = OPTIONS_MENU_PREFAB.instantiate()
+	if window_position != Vector2.ZERO: options_menu.position = window_position
+	options_menu.option_menu_exit.connect(on_option_menu_exit.bind())
+	get_tree().paused = true
+	caller.add_child(options_menu)
+
 	
 func set_music_volume(volume: int) -> void:
 	music_volume = volume
@@ -25,3 +33,7 @@ func set_sfx_volume(volume: int) -> void:
 
 func set_screenshake(value: bool) -> void:
 	is_screenshake_enabled = value
+
+
+func on_option_menu_exit() -> void:
+	get_tree().paused = false

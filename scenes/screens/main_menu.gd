@@ -44,23 +44,12 @@ func change_index(new_index: int) -> void:
 	current_index = clamp(new_index, 0, menu_nodes.size() - 1)
 
 
-func open_options_menu() -> void:
-	var options_menu: OptionsMenu = OptionsManager.OPTIONS_MENU_PREFAB.instantiate()
-	options_menu.option_menu_exit.connect(on_option_menu_exit.bind())
-	get_tree().paused = true
-	add_child(options_menu)
-
-
 func submit_selection() -> void:
 	match current_index:
 		0:
 			SoundManager.play_sound("sfx_uiselect")
 			get_tree().change_scene_to_packed(dino_selection)
 		1:
-			open_options_menu()
+			OptionsManager.open_options_menu(self)
 		2:
 			get_tree().quit()
-
-
-func on_option_menu_exit() -> void:
-	get_tree().paused = false
