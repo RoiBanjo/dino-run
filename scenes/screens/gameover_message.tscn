@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://w140byph5djn"]
+
+[ext_resource type="Script" uid="uid://bwv212n1b1e4e" path="res://scenes/screens/gameover_message.gd" id="1_gjix2"]
+[ext_resource type="Theme" uid="uid://c4i4u4nfq0qt3" path="res://resources/dino_run_theme.tres" id="2_jl584"]
+
+[sub_resource type="Curve" id="Curve_x72ft"]
+_data = [Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_dhmbl"]
+curve = SubResource("Curve_x72ft")
+
+[node name="GameOverMessage" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gjix2")
+
+[node name="FadeBackground" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CurveTexture_dhmbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -200.0
+offset_right = 225.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LblGameOver" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_jl584")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblFinalScore" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_jl584")
+text = "FINAL SCORE: 000000"
+horizontal_alignment = 1
+
+[node name="ButtonHContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnMainMenu" type="Button" parent="MarginContainer/VBoxContainer/ButtonHContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_jl584")
+text = "MAIN MENU"
+
+[node name="BtnRestart" type="Button" parent="MarginContainer/VBoxContainer/ButtonHContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_jl584")
+text = "RESTART"

@@ -2,6 +2,7 @@ extends Node
 
 signal reduce_health
 
+const LEVEL_PREFAB := preload("uid://c8b3b2j48wy2v")
 const MAX_HEALTH := 3
 
 var _current_score: int
@@ -20,6 +21,10 @@ var current_score: int:
 func process_hit() -> void:
 	current_health -= 1
 	reduce_health.emit()
+
+
+func restart_level():
+	get_tree().change_scene_to_packed(LEVEL_PREFAB)
 
 
 func check_if_high_score() -> void:

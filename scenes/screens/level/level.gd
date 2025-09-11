@@ -2,8 +2,8 @@ extends Node
 
 enum Diff {EASY, NORMAL, HARD, IMPOSSIBLE}
 
-const DINO_START_POS := Vector2i(100, 554)
 const CAMERA_START_POS := Vector2i(576, 324)
+const GAMEOVER_PREFAB := preload("uid://w140byph5djn")
 const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
 const GAME_SPEED: Dictionary = {
@@ -81,21 +81,6 @@ func create_go_sign() -> void:
 	add_child(go_sign)
 
 
-func restart_game() -> void:
-	is_started = false
-	GameManager.reset_starting_values()
-	dino.reset()
-	create_go_sign()
-	if current_enemy != null:
-		current_enemy = null
-	if previous_enemy != null:
-		previous_enemy = null
-	if current_obstacle != null:
-		current_obstacle = null
-	start_timer.start()
-	ui.start_ready_timer()
-	
-
 func spawn_obstacle(scene: PackedScene) -> void:
 	var obstacle = scene.instantiate()
 	obstacle.position = spawns.get_child(2).position
@@ -141,8 +126,15 @@ func end_game() -> void:
 		previous_enemy.set_deferred("monitoring", false)
 		previous_enemy.stop_movement = true
 	dino.die()
-	
+	show_gameover()
 
+
+func show_gameover() -> void:
+	var gameover_scene := GAMEOVER_PREFAB.instantiate()
+	gameover_scene.position = camera.position - Vector2(CAMERA_START_POS)
+	add_child(gameover_scene)
+
+	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
 		var create_enemy := randi_range(0, 10) <= 4
