@@ -17,7 +17,6 @@ const SPAWN_DELAY: Dictionary = {
 	OptionsManager.Diff.HARD: 2.0,
 }
 
-
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
 @export var mushroom: PackedScene
@@ -29,7 +28,7 @@ var is_started: bool = false
 var previous_enemy: Area2D = null
 var score_timer: int = 0
 var screen_size: Vector2i
-var speed := 0.0
+var speed: float = 0.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var dino: Dino = $Dino
@@ -40,14 +39,17 @@ var speed := 0.0
 @onready var ui: CanvasLayer = $UI
 
 
-func _ready() -> void:
-	GameManager.reset_starting_values()
+func _enter_tree() -> void:
 	is_started = false
 	screen_size = get_window().size
-	create_go_sign()
-	obstacles.shuffle()
-	change_game_diff()
 	OptionsManager.diff_changed.connect(change_game_diff.bind())
+
+
+func _ready() -> void:
+	obstacles.shuffle()
+	create_go_sign()
+	change_game_diff()
+	GameManager.reset_starting_values()
 	SoundManager.play_music(SoundManager.Music.LEVEL)
 	dino.change_texture(GameManager.selected_dino)
 	ui.start_ready_timer()
@@ -148,7 +150,6 @@ func _on_spawn_timer_timeout() -> void:
 				spawn_enemy(bird)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
-	print(spawn_timer.wait_time)
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:
