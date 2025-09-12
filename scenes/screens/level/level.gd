@@ -1,24 +1,23 @@
 extends Node
 
-enum Diff {EASY, NORMAL, HARD, IMPOSSIBLE}
 
 const CAMERA_START_POS := Vector2i(576, 324)
 const GAMEOVER_PREFAB := preload("uid://w140byph5djn")
 const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
 const GAME_SPEED: Dictionary = {
-	Diff.EASY: 10.0,
-	Diff.NORMAL: 10.0,
-	Diff.HARD: 15.0,
+	OptionsManager.Diff.EASY: 10.0,
+	OptionsManager.Diff.NORMAL: 10.0,
+	OptionsManager.Diff.HARD: 15.0,
 }
 const SCORE_TICK := 100
 const SPAWN_DELAY: Dictionary = {
-	Diff.EASY: 3.0,
-	Diff.NORMAL: 2.5,
-	Diff.HARD: 2.0,
+	OptionsManager.Diff.EASY: 4.0,
+	OptionsManager.Diff.NORMAL: 2.5,
+	OptionsManager.Diff.HARD: 2.0,
 }
 
-@export_enum("EASY", "NORMAL", "HARD") var game_difficulty
+
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
 @export var mushroom: PackedScene
@@ -47,7 +46,8 @@ func _ready() -> void:
 	screen_size = get_window().size
 	create_go_sign()
 	obstacles.shuffle()
-	speed = GAME_SPEED[game_difficulty]
+	change_game_diff()
+	OptionsManager.diff_changed.connect(change_game_diff.bind())
 	SoundManager.play_music(SoundManager.Music.LEVEL)
 	dino.change_texture(GameManager.selected_dino)
 	ui.start_ready_timer()
@@ -105,7 +105,7 @@ func spawn_enemy(scene: PackedScene) -> void:
 func start_game() -> void:
 	is_started = true
 	start_timer.stop()
-	spawn_timer.start(SPAWN_DELAY[game_difficulty])
+	spawn_timer.start(SPAWN_DELAY[OptionsManager.game_difficulty])
 	dino.enable_dino()
 	score_timer = Time.get_ticks_msec()
 
@@ -132,6 +132,11 @@ func show_gameover() -> void:
 	gameover_scene.position = camera.position - Vector2(CAMERA_START_POS)
 	add_child(gameover_scene)
 
+
+func change_game_diff() -> void:
+	speed = GAME_SPEED[OptionsManager.game_difficulty]
+	spawn_timer.wait_time = SPAWN_DELAY[OptionsManager.game_difficulty]
+
 	
 func _on_spawn_timer_timeout() -> void:
 	if not gameover:
@@ -143,6 +148,7 @@ func _on_spawn_timer_timeout() -> void:
 				spawn_enemy(bird)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
+	print(spawn_timer.wait_time)
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:

@@ -1,11 +1,21 @@
 extends Node
 
 
+signal diff_changed
+
+enum Diff {EASY, NORMAL, HARD, IMPOSSIBLE}
+
 const OPTIONS_MENU_PREFAB = preload("uid://b28h31237odhy")
+const DIFF_MAP: Dictionary = {
+	0: Diff.EASY,
+	1: Diff.NORMAL,
+	2: Diff.HARD,
+}
 
 var is_screenshake_enabled := true
 var music_volume := 5
 var sfx_volume := 10
+var game_difficulty := Diff.NORMAL
 
 
 func _enter_tree() -> void:
@@ -19,6 +29,11 @@ func open_options_menu(caller: Node, window_position: Vector2 = Vector2.ZERO) ->
 	options_menu.option_menu_exit.connect(on_option_menu_exit.bind())
 	get_tree().paused = true
 	caller.add_child(options_menu)
+
+
+func set_game_difficulty(difficulty: int) -> void:
+	game_difficulty = DIFF_MAP[difficulty]
+	diff_changed.emit()
 
 	
 func set_music_volume(volume: int) -> void:

@@ -68,6 +68,31 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="DiffContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="LblDiff" type="Label" parent="MarginContainer/VBoxContainer/DiffContainer"]
+layout_mode = 2
+theme = ExtResource("1_dhmbl")
+text = "DIFFICULTY"
+
+[node name="BtnDiff" type="OptionButton" parent="MarginContainer/VBoxContainer/DiffContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BtnReturn")
+focus_neighbor_bottom = NodePath("../../SFXContainer/SliderSFX")
+theme = ExtResource("1_dhmbl")
+selected = 1
+item_count = 3
+popup/item_0/text = "EASY"
+popup/item_0/id = 0
+popup/item_1/text = "NORMAL"
+popup/item_1/id = 1
+popup/item_2/text = "HARD"
+popup/item_2/id = 2
+
 [node name="SFXContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -83,7 +108,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 1
-focus_neighbor_top = NodePath("../../BtnReturn")
+focus_neighbor_top = NodePath("../../DiffContainer/BtnDiff")
 focus_neighbor_bottom = NodePath("../../MusicContainer/SliderMusic")
 theme = ExtResource("1_dhmbl")
 max_value = 10.0
@@ -142,6 +167,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ShakeContainer/ChkShake")
-focus_neighbor_bottom = NodePath("../SFXContainer/SliderSFX")
+focus_neighbor_bottom = NodePath("../DiffContainer/BtnDiff")
 theme = ExtResource("1_dhmbl")
 text = "RETURN"
