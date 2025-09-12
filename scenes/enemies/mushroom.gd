@@ -44,4 +44,6 @@ func _on_body_entered(_body: Node2D) -> void:
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	hurt = true
 	SoundManager.play_sound("sfx_bonk")
+	var bonk_score := clampi(500 * int(OptionsManager.game_difficulty), 200, 1000)
+	GameManager.current_score += bonk_score
 	monitoring = false
