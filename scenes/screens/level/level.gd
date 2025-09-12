@@ -1,3 +1,4 @@
+class_name Level
 extends Node
 
 
@@ -17,7 +18,9 @@ const SPAWN_DELAY: Dictionary = {
 	OptionsManager.Diff.HARD: 2.0,
 }
 
+@export_category("Obstacles")
 @export var obstacles: Array[PackedScene]
+@export_category("Enemies")
 @export var bird: PackedScene
 @export var mushroom: PackedScene
 
