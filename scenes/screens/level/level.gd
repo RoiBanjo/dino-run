@@ -17,6 +17,11 @@ const SPAWN_DELAY: Dictionary = {
 	OptionsManager.Diff.NORMAL: 2.5,
 	OptionsManager.Diff.HARD: 2.0,
 }
+const SPAWN_RANDOMNESS: Dictionary = {
+	OptionsManager.Diff.EASY: 1.0,
+	OptionsManager.Diff.NORMAL: 0.5,
+	OptionsManager.Diff.HARD: 0.2,
+}
 
 @export_category("Obstacles")
 @export var obstacles: Array[PackedScene]
@@ -140,7 +145,6 @@ func show_gameover() -> void:
 
 func change_game_diff() -> void:
 	speed = GAME_SPEED[OptionsManager.game_difficulty]
-	spawn_timer.wait_time = SPAWN_DELAY[OptionsManager.game_difficulty]
 
 	
 func _on_spawn_timer_timeout() -> void:
@@ -153,6 +157,7 @@ func _on_spawn_timer_timeout() -> void:
 				spawn_enemy(bird)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
+	spawn_timer.start(SPAWN_DELAY[OptionsManager.game_difficulty] + randf_range(0.0, -SPAWN_RANDOMNESS[OptionsManager.game_difficulty]))
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:
