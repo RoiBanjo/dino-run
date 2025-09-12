@@ -61,7 +61,7 @@ func _process(_delta: float) -> void:
 		OptionsManager.open_options_menu(self, camera_position)
 	if is_started and not gameover:
 		if Time.get_ticks_msec() - score_timer >= SCORE_TICK:
-			GameManager.current_score += 10
+			GameManager.current_score += (1 + (5 * int(OptionsManager.game_difficulty)))
 			score_timer = Time.get_ticks_msec()
 
 

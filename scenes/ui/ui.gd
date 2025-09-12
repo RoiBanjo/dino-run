@@ -1,7 +1,7 @@
 class_name UI
 extends CanvasLayer
 
-const MAX_SCORE_DIGITS := 6
+const MAX_SCORE_DIGITS := 7
 
 var label_counter := 0
 

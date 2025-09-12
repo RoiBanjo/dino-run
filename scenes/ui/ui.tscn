@@ -36,6 +36,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 46.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -44,13 +45,13 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Separator" type="HBoxContainer" parent="UITopContainer"]
 layout_mode = 2
-theme_override_constants/separation = 250
+theme_override_constants/separation = 230
 
 [node name="HeartContainers" type="HBoxContainer" parent="UITopContainer/Separator"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 60
 alignment = 1
@@ -68,10 +69,10 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 20
-text = "SCORE: 000000"
+text = "SCORE: 0000000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -79,10 +80,10 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 20
-text = "HIGH SCORE: 000000"
+text = "HIGH SCORE: 0000000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
