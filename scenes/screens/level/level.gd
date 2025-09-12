@@ -10,17 +10,15 @@ const GAME_SPEED: Dictionary = {
 	Diff.EASY: 10.0,
 	Diff.NORMAL: 10.0,
 	Diff.HARD: 15.0,
-	Diff.IMPOSSIBLE: 20.0,
 }
 const SCORE_TICK := 100
 const SPAWN_DELAY: Dictionary = {
 	Diff.EASY: 3.0,
 	Diff.NORMAL: 2.5,
 	Diff.HARD: 2.0,
-	Diff.IMPOSSIBLE: 1.5,
 }
 
-@export_enum("EASY", "NORMAL", "HARD", "IMPOSSIBLE") var game_difficulty
+@export_enum("EASY", "NORMAL", "HARD") var game_difficulty
 @export var obstacles: Array[PackedScene]
 @export var bird: PackedScene
 @export var mushroom: PackedScene
