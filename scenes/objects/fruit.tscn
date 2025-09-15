@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvhn7tcby70bf"]
+
+[ext_resource type="Script" uid="uid://lr8idyhri4ub" path="res://scenes/objects/fruit.gd" id="1_od4te"]
+[ext_resource type="Texture2D" uid="uid://j31nfsry7dwh" path="res://assets/graphics/fruits/FRUIT_LINE.png" id="1_s2xd0"]
+[ext_resource type="Texture2D" uid="uid://vpqvs1vac65r" path="res://assets/graphics/fruits/FRUIT_LINE_HL.png" id="2_od4te"]
+
+[sub_resource type="Animation" id="Animation_s2xd0"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteNOHL:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHL:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_od4te"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteNOHL:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHL:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58lx2"]
+_data = {
+&"RESET": SubResource("Animation_od4te"),
+&"default": SubResource("Animation_s2xd0")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58lx2"]
+radius = 15.0
+
+[node name="Fruit" type="Area2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+collision_layer = 16
+collision_mask = 34
+script = ExtResource("1_od4te")
+
+[node name="SpriteNOHL" type="Sprite2D" parent="."]
+texture = ExtResource("1_s2xd0")
+hframes = 5
+vframes = 8
+
+[node name="SpriteHL" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_od4te")
+hframes = 5
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_58lx2")
+}
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_58lx2")

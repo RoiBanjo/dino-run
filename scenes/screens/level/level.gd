@@ -3,6 +3,7 @@ extends Node
 
 
 const CAMERA_START_POS := Vector2i(576, 324)
+const FRUIT_PREFAB := preload("uid://cvhn7tcby70bf")
 const GAMEOVER_PREFAB := preload("uid://w140byph5djn")
 const GO_SIGN := preload("uid://cmb41isywt1hk")
 const GO_SIGN_START_POS := Vector2i(300, 564)
@@ -30,7 +31,9 @@ const SPAWN_RANDOMNESS: Dictionary = {
 @export var mushroom: PackedScene
 
 var current_enemy: Area2D = null
+var current_fruit: Area2D = null
 var current_obstacle: Area2D = null
+var fruit_counter: int = 0
 var gameover: bool = false
 var is_started: bool = false
 var previous_enemy: Area2D = null
@@ -50,7 +53,7 @@ var speed: float = 0.0
 func _enter_tree() -> void:
 	is_started = false
 	screen_size = get_window().size
-	OptionsManager.diff_changed.connect(change_game_diff.bind())
+	OptionsManager.diff_changed.connect(change_game_diff)
 
 
 func _ready() -> void:
@@ -93,7 +96,7 @@ func spawn_obstacle(scene: PackedScene) -> void:
 	var obstacle = scene.instantiate()
 	obstacle.position = spawns.get_child(2).position
 	add_child(obstacle)
-	obstacle.body_entered.connect(on_dino_hit.bind())
+	obstacle.body_entered.connect(on_dino_hit)
 	current_obstacle = obstacle
 
 
@@ -104,12 +107,24 @@ func spawn_enemy(scene: PackedScene) -> void:
 	if enemy.name == "Mushroom":
 		enemy.position = spawns.get_child(2).position
 		if enemy.has_node("Hurtbox"):
-			enemy.get_node("Hurtbox").body_entered.connect(dino.rebound.bind())
+			enemy.get_node("Hurtbox").body_entered.connect(dino.rebound)
 	else:
 		enemy.position = spawns.get_child(1).position
 	add_child(enemy)
-	enemy.body_entered.connect(on_dino_hit.bind())
+	enemy.body_entered.connect(on_dino_hit)
 	current_enemy = enemy
+
+
+func spawn_fruit() -> void:
+	fruit_counter += 1
+	if fruit_counter >= clampi(4 * OptionsManager.game_difficulty, 2, 8):
+		if randf() < 0.5:
+			var fruit = FRUIT_PREFAB.instantiate()
+			fruit.set_position(Vector2i(spawns.get_child(3).position) + Vector2i(randi_range(100, 500), 0))
+			add_child(fruit)
+			fruit.body_entered.connect(on_dino_pickup)
+			current_fruit = fruit
+			fruit_counter = 0
 
 
 func start_game() -> void:
@@ -157,19 +172,31 @@ func _on_spawn_timer_timeout() -> void:
 				spawn_enemy(bird)
 		else:
 			spawn_obstacle(obstacles[randi_range(0, obstacles.size() - 1)])
+		spawn_fruit()
 	spawn_timer.start(SPAWN_DELAY[OptionsManager.game_difficulty] + randf_range(0.0, -SPAWN_RANDOMNESS[OptionsManager.game_difficulty]))
 
 
 func _on_despawner_area_entered(area: Area2D) -> void:
-	if area == current_enemy:
-		current_enemy = null
-	elif area == current_obstacle:
-		current_obstacle = null
+	match area:
+		current_enemy:
+			current_enemy = null
+		current_obstacle:
+			current_obstacle = null
+		current_fruit:
+			current_fruit = null
 	area.queue_free()
 	
 
 func _on_despawner_body_entered(body: Node2D) -> void:
 	body.queue_free()
+
+
+func on_dino_pickup(body: Node2D) -> void:
+	if body == dino:
+		GameManager.current_score += 500
+		SoundManager.play_sound("sfx_uiselect")
+		current_fruit.queue_free()
+		current_fruit = null
 
 
 func on_dino_hit(_body: Node2D) -> void:

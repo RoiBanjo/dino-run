@@ -60,6 +60,9 @@ position = Vector2(1452, 300)
 [node name="SpawnBottom" type="Marker2D" parent="Spawns"]
 position = Vector2(1452, 552)
 
+[node name="SpawnFruit" type="Marker2D" parent="Spawns"]
+position = Vector2(1452, 200)
+
 [node name="UI" parent="." instance=ExtResource("10_vtaks")]
 
 [connection signal="timeout" from="StartTimer" to="." method="start_game"]

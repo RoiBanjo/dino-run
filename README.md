@@ -13,5 +13,6 @@ Title is made with ChatGPT
 - obstacles - <https://free-game-assets.itch.io/free-swamp-2d-tileset-pixel-art>
 - font - <https://www.dafont.com/retro-gaming.font>
 - hearts - <https://fliflifly.itch.io/hearts-and-health-bar>
+- fruits - <https://helm3t.itch.io/free-32x32-fruits-and-veggies-asset-pack>
 
 Sounds and music obtained from <https://freesound.org/>
