@@ -41,7 +41,7 @@ func refresh_ui() -> void:
 
 
 func change_index(new_index: int) -> void:
-	current_index = clamp(new_index, 0, menu_nodes.size() - 1)
+	current_index = clamp(new_index, 0, menu_nodes.size() - 2) # -1 when EXIT enabled
 
 
 func submit_selection() -> void:
